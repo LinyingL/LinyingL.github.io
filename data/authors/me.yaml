@@ -6,7 +6,7 @@ name:
   given: Linying
   family: Li
   alternate: 李林颖
-  pronouns: she/her
+  pronouns: he/him
 status:
   icon: "🌿"
 role: Social Scientist | Political Economy & Data Science
@@ -57,12 +57,6 @@ experience:
     end: 2025-12-31
     summary: |
       Managed Ukraine aid and social housing assistance. Focused on quality assurance and legal compliance.
-  - role: E-Commerce Marketing
-    org: Changsha Right Ltd (Temu Supplier)
-    start: 2024-11-01
-    end: 2025-01-31
-    summary: |
-      Localized product descriptions and managed content for the German market.
   - role: Research Assistant
     org: Beijing Minsheng Thinktank Ltd
     start: 2021-06-01
