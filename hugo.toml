@@ -1,0 +1,15 @@
+# Multilingual configuration
+defaultContentLanguage = 'en'
+title = 'Linying Li'
+
+[languages]
+  [languages.en]
+    languageCode = 'en-us'
+    languageName = 'English'
+    contentDir = 'content'
+    weight = 1
+  [languages.de]
+    languageCode = 'de'
+    languageName = 'Deutsch'
+    contentDir = 'content/de'
+    weight = 2
