@@ -2,7 +2,7 @@
 export const SITE = {
   title: 'Linying Li',
   description:
-    'Essays on political economy, political theory, and international affairs.',
+    'A data journalism blog on political economy and the institutions that hold states together.',
   author: 'Linying Li',
   authorEmail: 'linyingli_hy@outlook.com',
   githubUser: 'linyingl',
@@ -19,9 +19,9 @@ export const SITE = {
 // Edit freely. Plain text or inline HTML both work.
 export const INTRO = {
   heading: 'Linying Li',
-  body: `Long, slow essays on political economy and the institutions that
-    hold states together — or fail to. Written to still be worth reading
-    a year from now.`,
+  body: `A data journalism blog on political economy and the institutions
+    that hold states together — or fail to. Long, slow pieces, meant to
+    still be worth reading a year from now.`,
   aboutLabel: 'More about me',
   aboutHref: '/about/',
 } as const;
