@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="Search the archive.">
+  <div class="container">
+    <header class="page-head">
+      <div class="kicker">Search</div>
+      <h1>Search</h1>
+      <p>Search every article in the archive.</p>
+    </header>
+
+    <div class="search-wrap">
+      <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+      <div id="pf-wrap"></div>
+      <script src="/pagefind/pagefind-ui.js" is:inline></script>
+      <script is:inline>
+        window.addEventListener('DOMContentLoaded', () => {
+          new PagefindUI({
+            element: '#pf-wrap',
+            showImages: false,
+            resetStyles: false,
+            showSubResults: true,
+          });
+        });
+      </script>
+      <noscript>
+        <p class="muted">
+          Search requires JavaScript. You can still browse by
+          <a href="/archive/">archive</a>, <a href="/categories/">section</a> or
+          <a href="/tags/">tag</a>.
+        </p>
+      </noscript>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  getAllPosts,
+  groupByYearMonth,
+  formatDateShort,
+  getCategoryMeta,
+} from '../utils/posts';
+
+const all = await getAllPosts();
+const groups = groupByYearMonth(all);
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+
+const years = [...groups.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title="Archive" description="Every article, by date.">
+  <div class="container">
+    <header class="page-head">
+      <div class="kicker">Archive</div>
+      <h1>Archive</h1>
+      <p>{all.length} article{all.length === 1 ? '' : 's'}, organised by month.</p>
+    </header>
+
+    {years.map((year) => {
+      const months = [...groups.get(year)!.entries()].sort((a, b) => b[0] - a[0]);
+      return (
+        <section class="archive__year">
+          <h2>{year}</h2>
+          {months.map(([m, items]) => (
+            <>
+              <div class="archive__month">{MONTH_NAMES[m]}</div>
+              <ul class="list" style="border-top:none;">
+                {items.map((p) => {
+                  const cat = getCategoryMeta(p.data.category);
+                  return (
+                    <li class="list__item">
+                      <span class="list__date">{formatDateShort(p.data.pubDate)}</span>
+                      <div>
+                        <div
+                          class="list__kicker"
+                          style={cat?.accent ? `color:${cat.accent}` : undefined}
+                        >
+                          {cat?.kicker}
+                        </div>
+                        <h3 class="list__title">
+                          <a href={`/posts/${p.id}/`}>{p.data.title}</a>
+                        </h3>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          ))}
+        </section>
+      );
+    })}
+  </div>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { Post } from '../utils/posts';
+import { formatDateShort, getCategoryMeta } from '../utils/posts';
+
+interface Props {
+  post: Post;
+  showImage?: boolean;
+}
+const { post, showImage = false } = Astro.props;
+const cat = getCategoryMeta(post.data.category);
+const kicker = post.data.kicker ?? cat?.kicker ?? 'Article';
+const accent = cat?.accent;
+---
+
+<article class="card">
+  {showImage && post.data.cover && (
+    <a href={`/posts/${post.id}/`} class="card__image" style="display:block;margin-bottom:0.9rem;background:none;">
+      <Image
+        src={post.data.cover}
+        alt={post.data.coverAlt ?? ''}
+        widths={[320, 640]}
+        sizes="(max-width: 720px) 100vw, 320px"
+        style="aspect-ratio:4/3;object-fit:cover;width:100%;border:1px solid var(--color-rule);"
+      />
+    </a>
+  )}
+  <div class="kicker card__kicker" style={accent ? `color:${accent}` : undefined}>{kicker}</div>
+  <h3 class="card__title">
+    <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+  </h3>
+  {post.data.description && (
+    <p class="card__dek">{post.data.description}</p>
+  )}
+  <div class="card__meta">
+    {post.data.author ?? ''}
+    {post.data.author ? ' · ' : ''}
+    {formatDateShort(post.data.pubDate)}
+  </div>
+</article>

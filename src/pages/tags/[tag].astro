@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { getAllPosts, tagSlug } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  const map = new Map<string, { label: string; posts: typeof posts }>();
+  for (const p of posts) {
+    for (const t of p.data.tags) {
+      const s = tagSlug(t);
+      if (!map.has(s)) map.set(s, { label: t, posts: [] });
+      map.get(s)!.posts.push(p);
+    }
+  }
+  return [...map.entries()].map(([slug, { label, posts }]) => ({
+    params: { tag: slug },
+    props: { label, posts },
+  }));
+}
+
+const { label, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${label}`} description={`Articles tagged ${label}.`}>
+  <div class="container">
+    <header class="page-head">
+      <div class="kicker">Tag</div>
+      <h1>#{label}</h1>
+      <p>{posts.length} {posts.length === 1 ? 'article' : 'articles'}.</p>
+    </header>
+
+    <ArticleList posts={posts} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config';
+---
+
+<BaseLayout title="About" description={`About ${SITE.author}.`}>
+  <div class="container">
+    <div class="about">
+      <div class="kicker">About</div>
+      <h1>Linying Li</h1>
+      <p class="about__lede">
+        Trained in political science at LMU Munich and the University of
+        Zurich. My research sits between political economy and political
+        theory, with an empirical leaning toward computational text
+        analysis. The essays on this site are where the reading turns
+        into writing.
+      </p>
+
+      <section>
+        <h2>Short bio</h2>
+        <p>
+          I read for a BA in Political Science and Law at LMU Munich
+          (2019–2022) and an MA in Political Science at the University of
+          Zurich (2022–2024), specialising in Political Economy and
+          Philosophy. My BA thesis worked through Jürgen Habermas on
+          deliberative democracy, and Habermas remains the theorist I
+          most often return to.
+        </p>
+
+        <p>
+          My methodological training has tried to keep quantitative and
+          qualitative tools in conversation: econometrics and
+          causal-inference designs on one side, Qualitative Comparative
+          Analysis on the other, and a fair amount of text-as-data work
+          with transformer models. The MA thesis that came out of all
+          this used BERTopic and a fine-tuned BERT model to study
+          political discourse on YouTube around income inequality.
+        </p>
+
+      </section>
+
+      <section>
+        <h2>Selected writing</h2>
+        <p>
+          Browse by section:
+          <a href="/categories/economics/">Economics</a>,
+          <a href="/categories/politics/">Politics</a>,
+          <a href="/categories/international-relations/">International Relations</a>.
+          The full list lives in the <a href="/archive/">archive</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <ul>
+          <li>
+            Email —
+            <a href={`mailto:${SITE.authorEmail}`}>{SITE.authorEmail}</a>
+          </li>
+          <li>
+            GitHub —
+            <a href={`https://github.com/${SITE.githubUser}`}>
+              @{SITE.githubUser}
+            </a>
+          </li>
+          <li>RSS — <a href="/rss.xml">/rss.xml</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

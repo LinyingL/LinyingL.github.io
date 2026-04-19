@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { getAllPosts, getPostsByCategory } from '../../utils/posts';
+import { CATEGORIES, type CategorySlug } from '../../config';
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((c) => ({ params: { category: c.slug } }));
+}
+
+const { category } = Astro.params;
+const meta = CATEGORIES.find((c) => c.slug === category)!;
+const posts = await getPostsByCategory(category as CategorySlug);
+---
+
+<BaseLayout
+  title={meta.name}
+  description={`Articles in ${meta.name}.`}
+>
+  <div class="container">
+    <header class="page-head">
+      <div class="kicker">Section</div>
+      <h1>{meta.name}</h1>
+      <p>{posts.length} {posts.length === 1 ? 'article' : 'articles'}.</p>
+    </header>
+
+    {posts.length > 0 ? (
+      <ArticleList posts={posts} />
+    ) : (
+      <p class="muted">No articles in this section yet.</p>
+    )}
+  </div>
+</BaseLayout>

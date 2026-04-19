@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import type { Post } from '../utils/posts';
+import {
+  formatDate,
+  getAdjacentPosts,
+  getCategoryMeta,
+  readingTime,
+  tagSlug,
+} from '../utils/posts';
+
+interface Props { post: Post; body: string }
+const { post, body } = Astro.props;
+const cat = getCategoryMeta(post.data.category);
+const rt = readingTime(body);
+const { newer, older } = await getAdjacentPosts(post);
+const kicker = post.data.kicker ?? cat?.kicker ?? 'Article';
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  image={post.data.cover?.src}
+>
+  <article class="post container">
+    <header class="post__header">
+      <a class="kicker" href={`/categories/${post.data.category}/`}>
+        {kicker}
+      </a>
+      <h1 class="post__title">{post.data.title}</h1>
+      {post.data.description && (
+        <p class="post__dek">{post.data.description}</p>
+      )}
+      <div class="post__byline">
+        {post.data.author && <span><strong>{post.data.author}</strong></span>}
+        <span>{formatDate(post.data.pubDate)}</span>
+        {post.data.updatedDate && (
+          <span>Updated {formatDate(post.data.updatedDate)}</span>
+        )}
+        <span>{rt} min read</span>
+      </div>
+    </header>
+
+    {post.data.cover && (
+      <figure class="post__cover">
+        <Image
+          src={post.data.cover}
+          alt={post.data.coverAlt ?? ''}
+          widths={[768, 1200, 1600]}
+          sizes="(max-width: 900px) 100vw, 1100px"
+        />
+        {post.data.coverAlt && (
+          <figcaption class="post__cover-caption">{post.data.coverAlt}</figcaption>
+        )}
+      </figure>
+    )}
+
+    <div class="prose" data-pagefind-body>
+      <slot />
+    </div>
+
+    <footer class="post-footer">
+      {post.data.tags.length > 0 && (
+        <div class="tag-row">
+          {post.data.tags.map((t) => (
+            <a class="tag" href={`/tags/${tagSlug(t)}/`}>#{t}</a>
+          ))}
+        </div>
+      )}
+
+      <div class="adjacent">
+        <div class="adjacent__cell">
+          {newer && (
+            <a href={`/posts/${newer.id}/`}>
+              <div class="adjacent__label">← Newer</div>
+              <div class="adjacent__title">{newer.data.title}</div>
+            </a>
+          )}
+        </div>
+        <div class="adjacent__cell adjacent__cell--right">
+          {older && (
+            <a href={`/posts/${older.id}/`}>
+              <div class="adjacent__label">Older →</div>
+              <div class="adjacent__title">{older.data.title}</div>
+            </a>
+          )}
+        </div>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

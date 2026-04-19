@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroArticle from '../components/HeroArticle.astro';
+import ArticleList from '../components/ArticleList.astro';
+import { getAllPosts } from '../utils/posts';
+import { SITE, INTRO } from '../config';
+
+const all = await getAllPosts();
+
+// Cover story: configured pin, else featured, else newest.
+const hero =
+  (SITE.heroSlug && all.find((p) => p.id === SITE.heroSlug)) ||
+  all.find((p) => p.data.featured) ||
+  all[0];
+
+const rest = all.filter((p) => p.id !== hero?.id);
+---
+
+<BaseLayout>
+  <div class="container">
+    <section class="intro">
+      <h1>{INTRO.heading}</h1>
+      <p>{INTRO.body}</p>
+      <a href={INTRO.aboutHref} class="intro__more">
+        {INTRO.aboutLabel}
+        <span aria-hidden="true">→</span>
+      </a>
+    </section>
+  </div>
+
+  {hero && <HeroArticle post={hero} />}
+
+  <div class="container">
+    {rest.length > 0 && (
+      <>
+        <div class="section-head">
+          <h2>More from the archive</h2>
+          <a href="/archive/">All posts →</a>
+        </div>
+        <ArticleList posts={rest} />
+      </>
+    )}
+
+    {all.length === 0 && (
+      <div style="padding:4rem 0;text-align:center;color:var(--color-muted);">
+        <p>No posts yet. Add a Markdown file in <code>src/content/posts/</code>.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

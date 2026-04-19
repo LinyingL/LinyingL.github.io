@@ -1,0 +1,32 @@
+---
+import type { Post } from '../utils/posts';
+import { formatDateShort, getCategoryMeta } from '../utils/posts';
+
+interface Props { posts: Post[] }
+const { posts } = Astro.props;
+---
+
+<ul class="list">
+  {posts.map((post) => {
+    const cat = getCategoryMeta(post.data.category);
+    return (
+      <li class="list__item">
+        <span class="list__date">{formatDateShort(post.data.pubDate)}</span>
+        <div>
+          <div
+            class="list__kicker"
+            style={cat?.accent ? `color:${cat.accent}` : undefined}
+          >
+            {cat?.kicker}
+          </div>
+          <h3 class="list__title">
+            <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+          </h3>
+          {post.data.description && (
+            <p class="list__dek">{post.data.description}</p>
+          )}
+        </div>
+      </li>
+    );
+  })}
+</ul>

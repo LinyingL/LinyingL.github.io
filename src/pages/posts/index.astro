@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import Pagination from '../../components/Pagination.astro';
+import { getAllPosts } from '../../utils/posts';
+import { SITE } from '../../config';
+
+const all = await getAllPosts();
+const perPage = SITE.postsPerPage;
+const pageItems = all.slice(0, perPage);
+const totalPages = Math.max(1, Math.ceil(all.length / perPage));
+---
+
+<BaseLayout title="All posts" description={`All articles on ${SITE.title}.`}>
+  <div class="container">
+    <header class="page-head">
+      <div class="kicker">Archive</div>
+      <h1>All posts</h1>
+      <p>Every article on {SITE.title}, newest first.</p>
+    </header>
+
+    {pageItems.length > 0 ? (
+      <ArticleList posts={pageItems} />
+    ) : (
+      <p class="muted">No posts yet.</p>
+    )}
+
+    {totalPages > 1 && (
+      <Pagination
+        current={1}
+        total={totalPages}
+        next={totalPages > 1 ? '/posts/page/2/' : undefined}
+      />
+    )}
+  </div>
+</BaseLayout>

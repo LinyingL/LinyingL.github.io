@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" noIndex>
+  <div class="notfound">
+    <p class="num">404</p>
+    <div class="kicker">Page not found</div>
+    <h1 style="font-size:2rem;margin:0.5rem 0 1rem;">This page is missing.</h1>
+    <p class="muted" style="max-width:34rem;margin:0 auto 2rem;">
+      The page you are looking for cannot be found. It may have been moved, or
+      perhaps it never existed at all.
+    </p>
+    <p>
+      <a href="/" class="tag" style="display:inline-block;padding:0.6rem 1rem;">
+        Return home
+      </a>
+    </p>
+  </div>
+</BaseLayout>

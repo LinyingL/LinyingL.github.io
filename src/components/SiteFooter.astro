@@ -1,0 +1,32 @@
+---
+import { SITE, CATEGORIES } from '../config';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <h4>{SITE.title}</h4>
+      <p>{SITE.description}</p>
+      <p>&copy; {year} {SITE.author}. All rights reserved.</p>
+    </div>
+    <div>
+      <h4>Sections</h4>
+      <ul>
+        {CATEGORIES.map((c) => (
+          <li><a href={`/categories/${c.slug}/`}>{c.name}</a></li>
+        ))}
+        <li><a href="/archive/">Archive</a></li>
+        <li><a href="/tags/">Tags</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="/rss.xml">RSS</a></li>
+        <li><a href={`https://github.com/${SITE.githubUser}`} rel="me noopener">GitHub</a></li>
+        <li><a href={`mailto:${SITE.authorEmail}`}>Email</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
