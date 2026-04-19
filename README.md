@@ -88,26 +88,6 @@ npm run preview     # preview the production build
 4. That's it. Every `git push` to `main` rebuilds and redeploys within a
    minute or two. The workflow lives at `.github/workflows/deploy.yml`.
 
-### Custom domain (optional)
-
-If you later buy a domain (e.g. `linyingli.com`):
-
-1. Add a `CNAME` file in `public/` containing just the domain.
-2. Update `site:` in `astro.config.mjs` and `SITE.url` in `src/config.ts`.
-3. Point the domain's DNS at GitHub Pages (GitHub's docs have the
-   current IPs).
-
-## Customising
-
-- **Site title, author, description, URL** — `src/config.ts`
-- **Navigation links** — `src/config.ts` (`NAV`)
-- **Categories** — `src/config.ts` (`CATEGORIES`) **and** the enum in
-  `src/content.config.ts` (both need to match)
-- **Colours, fonts, spacing** — CSS variables at the top of
-  `src/styles/global.css`
-- **About page** — edit `src/pages/about.astro` directly
-- **Homepage "cover story"** — set `SITE.heroSlug` in `src/config.ts`
-  to pin a specific article, or leave empty to auto-pick the newest
 
 ## Project structure
 
@@ -135,17 +115,3 @@ src/
 └── utils/posts.ts            # helpers (sorting, tags, reading-time)
 ```
 
-## Things I deliberately did not include
-
-- **Comments** — GitHub Pages is static, so comments need a third-party
-  service. If you want them later, [Giscus](https://giscus.app) uses
-  GitHub Issues as the backend and takes about 5 minutes to add.
-- **Analytics** — drop in [Plausible](https://plausible.io),
-  [Umami](https://umami.is) or Google Analytics via a `<script>` tag in
-  `BaseLayout.astro` when you want it.
-- **A CMS / admin panel** — by design. The workflow is "write Markdown,
-  `git push`, done."
-
-## Licence
-
-Content is yours. The theme scaffolding is free to reuse.
