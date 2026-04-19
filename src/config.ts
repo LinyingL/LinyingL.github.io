@@ -20,8 +20,8 @@ export const SITE = {
 export const INTRO = {
   heading: 'Linying Li',
   body: `A data journalism blog on political economy and international
-    relations — reading politics through the language states use and
-    the evidence they leave behind.`,
+    relations, written from the conviction that empirical evidence and
+    political theory belong in the same conversation.`,
   aboutLabel: 'More about me',
   aboutHref: '/about/',
 } as const;
