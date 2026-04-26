@@ -2,7 +2,7 @@
 title: "Arbeit muss sich lohnen — aber für wen?"
 description: "Wie das deutsche Steuer- und Abgabensystem die untere Mitte bestraft und das Kapital verschont. Eine datengestützte Analyse der Aufstiegsfalle 2026."
 pubDate: 2026-04-26
-category: economics
+category: politics
 kicker: "Political economy"
 tags:
   - germany
