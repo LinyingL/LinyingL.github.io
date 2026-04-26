@@ -55,7 +55,7 @@ Eine Auswertung von 215 Bundestags-Redebeiträgen zwischen Mai 2025 und Februar 
 <figure class="wide">
   <img src="/assets/arbeit-muss-sich-lohnen/narrative_policy_framework.png" alt="Narrative Policy Framework: Tabellarische Übersicht der narrativen Rollenzuschreibungen (Opfer, Schurke, Held, Metaphern, geforderte Maßnahmen) nach Partei — Die Linke, SPD, Grüne, CDU/CSU, AfD.">
   <figcaption>
-    Abbildung 5 · Narrative Policy Framework der Bürgergeld-Debatte: Rollenzuschreibungen nach Partei. Auswertung von 215 Bundestags-Redebeiträgen (Mai 2025 – Februar 2026). Die Tabelle zeigt, wie jede Fraktion Opfer, Schurken und Helden definiert und welche Metaphern und Maßnahmen sie daraus ableitet.
+    Abbildung 1 · Narrative Policy Framework der Bürgergeld-Debatte: Rollenzuschreibungen nach Partei. Auswertung von 215 Bundestags-Redebeiträgen (Mai 2025 – Februar 2026). Die Tabelle zeigt, wie jede Fraktion Opfer, Schurken und Helden definiert und welche Metaphern und Maßnahmen sie daraus ableitet.
   </figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ Das ist die Aufstiegsfalle. Sie ist kein Mythos, sie ist Mathematik.
 <figure class="wide">
   <img src="/assets/arbeit-muss-sich-lohnen/verfuegbares_einkommen_2025.png" alt="Verfügbares Jahreseinkommen in Abhängigkeit vom Bruttojahreslohn — Single und Alleinerziehende mit einem Kind. Die Kurve verläuft zwischen 0 und 20.000 Euro fast flach.">
   <figcaption>
-    Abbildung 1 · Verfügbares Einkommen einer alleinstehenden Vollzeitbeschäftigten (blau) und einer Alleinerziehenden mit einem Kind (rot) in Abhängigkeit vom Bruttojahreslohn. Eigene Modellrechnung, Stand 2025 (Mindestlohn 12,82 €/h, Anrechnung von Wohngeld, Kinderzuschlag, Bildungs- und Teilhabepaket, Sozialabgaben und Lohnsteuer).
+    Abbildung 2 · Verfügbares Einkommen einer alleinstehenden Vollzeitbeschäftigten (blau) und einer Alleinerziehenden mit einem Kind (rot) in Abhängigkeit vom Bruttojahreslohn. Eigene Modellrechnung, Stand 2025 (Mindestlohn 12,82 €/h, Anrechnung von Wohngeld, Kinderzuschlag, Bildungs- und Teilhabepaket, Sozialabgaben und Lohnsteuer).
   </figcaption>
 </figure>
 
@@ -103,7 +103,7 @@ Die nächste Abbildung übersetzt das in eine intuitivere Größe: die Lohnverbl
 <figure class="wide">
   <img src="/assets/arbeit-muss-sich-lohnen/lohnverbleibsquote_2025.png" alt="Lohnverbleibsquote in Prozent vom nächsten verdienten Euro, mit Vergleichslinie zur konstanten Kapitalrendite von 73,6 Prozent.">
   <figcaption>
-    Abbildung 2 · Marginale Lohnverbleibsquote: Anteil des nächsten verdienten Euros, der nach Steuern, Sozialabgaben und Transferentzug beim Beschäftigten ankommt. Die goldene Vergleichslinie zeigt die konstante Kapitalrendite (73,6 % nach Abgeltungsteuer und Solidaritätszuschlag).
+    Abbildung 3 · Marginale Lohnverbleibsquote: Anteil des nächsten verdienten Euros, der nach Steuern, Sozialabgaben und Transferentzug beim Beschäftigten ankommt. Die goldene Vergleichslinie zeigt die konstante Kapitalrendite (73,6 % nach Abgeltungsteuer und Solidaritätszuschlag).
   </figcaption>
 </figure>
 
@@ -120,7 +120,7 @@ Wie sich diese vier Mechanismen in einer konkreten Lohnabrechnung addieren, zeig
 <figure>
   <img src="/assets/arbeit-muss-sich-lohnen/waterfall_lohnerhoehung.png" alt="Waterfall-Diagramm: 600 Euro Brutto-Tariferhöhung minus 130 Euro Wohngeld minus 95 Euro Kinderzuschlag minus 120 Euro Sozialabgaben minus 75 Euro Lohnsteuer ergibt 180 Euro Netto-Plus pro Monat.">
   <figcaption>
-    Abbildung 3 · 600 € Brutto-Tariferhöhung führen zu 180 € Netto-Plus pro Monat. Modellrechnung für eine alleinerziehende Vollzeitbeschäftigte mit einem Kind, Mindestlohn 12,82 €/h, mittelgroße ostdeutsche Stadt. Drei Subsysteme (Transferentzug, Sozialversicherung, Einkommensteuer) absorbieren gemeinsam 70 % der nominalen Lohnerhöhung.
+    Abbildung 4 · 600 € Brutto-Tariferhöhung führen zu 180 € Netto-Plus pro Monat. Modellrechnung für eine alleinerziehende Vollzeitbeschäftigte mit einem Kind, Mindestlohn 12,82 €/h, mittelgroße ostdeutsche Stadt. Drei Subsysteme (Transferentzug, Sozialversicherung, Einkommensteuer) absorbieren gemeinsam 70 % der nominalen Lohnerhöhung.
   </figcaption>
 </figure>
 
@@ -141,7 +141,7 @@ Wenn man die Wirkung der Aufstiegsfalle zeigen will, hat man zwei Möglichkeiten
 <figure class="wide">
   <img src="/assets/arbeit-muss-sich-lohnen/lohnsteuer_oecd_2025.png" alt="OECD-Vergleich der marginalen Grenzbelastung auf Lohneinkommen, normiert auf das Vielfache des nationalen Durchschnittslohns. Deutschland liegt bei einem Durchschnittslohn deutlich über USA, UK, Polen und Niederlande.">
   <figcaption>
-    Abbildung 4 · Marginale Grenzbelastung auf Lohneinkommen im OECD-Vergleich, normiert auf das Vielfache des nationalen Durchschnittslohns. Die deutsche Kurve fällt zweimal markant ab — bei 66.150 € (Beitragsbemessungsgrenze KV/PV) und bei 96.600 € (BBG RV/AV). Die Schere zwischen Lohnbelastung und Kapitalertragsbesteuerung (26,375 % flat) beträgt im Median rund 25 Prozentpunkte.
+    Abbildung 5 · Marginale Grenzbelastung auf Lohneinkommen im OECD-Vergleich, normiert auf das Vielfache des nationalen Durchschnittslohns. Die deutsche Kurve fällt zweimal markant ab — bei 66.150 € (Beitragsbemessungsgrenze KV/PV) und bei 96.600 € (BBG RV/AV). Die Schere zwischen Lohnbelastung und Kapitalertragsbesteuerung (26,375 % flat) beträgt im Median rund 25 Prozentpunkte.
   </figcaption>
 </figure>
 
