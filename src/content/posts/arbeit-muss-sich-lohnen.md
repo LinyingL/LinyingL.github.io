@@ -219,7 +219,7 @@ Das konservative Narrativ vom faulen Bürgergeldempfänger ist nicht nur falsch,
 
 **Methodische Hinweise**
 
-Die Personenbeispiele im Text sind Modellrechnungen. Ich habe sie an jeder Stelle als solche gekennzeichnet. Sämtliche Zahlen — Mindestlohn 12,82 € pro Stunde, Grundfreibetrag 12.096 €, Beitragsbemessungsgrenzen 66.150 € und 96.600 € — entsprechen den gesetzlichen Werten für 2025.
+Die Personenbeispiele im Text sind Modellrechnungen. Ich habe sie an jeder Stelle als solche gekennzeichnet. Sämtliche Zahlen — Mindestlohn 12,82 € pro Stunde, Grundfreibetrag 12.096 €, Beitragsbemessungsgrenzen 66.150 € und 96.600 € — entsprechen den gesetzlichen Werten für 2025. Die Verwendung der 2025er Werte ist eine bewusste Entscheidung: Der Vergleich stützt sich auf Durchschnittseinkommen und Median, und die entsprechenden Zahlen für 2026 werden erst 2027 veröffentlicht.
 
 Hinter dem Hauptbeispiel (180 € netto aus 600 € brutto Tariferhöhung) steckt folgende Konstellation: alleinerziehend, ein Kind im Hortalter, Vollzeit zum Mindestlohn, mittelgroße ostdeutsche Stadt, regional übliche Miete. In der Rechnung enthalten: Wohngeld, Kinderzuschlag mit Sofortzuschlag, Bildungs- und Teilhabepaket, Sozialabgaben, Lohnsteuer. Nicht enthalten: kommunale Sach- und Sozialleistungen, weil ihre Berechnung zu kommunal heterogen ist. Diese würden das Bild eher noch verstärken. Verschiebt man Bundesland, Alter des Kindes oder Miete, weicht das Ergebnis um wenige Prozentpunkte ab; die Grundproportion von rund einem Drittel Netto-Übergang bleibt erhalten.
 
