@@ -8,7 +8,7 @@ tags:
   - germany
   - tax-policy
   - inequality
-  - buergergeld
+  - bürgergeld
   - distributive-justice
 author: "Linying Li"
 draft: false
