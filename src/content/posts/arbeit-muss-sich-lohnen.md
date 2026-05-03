@@ -130,9 +130,9 @@ Die Annahmen dieser Rechnung sind dokumentiert: Mietkosten in einer mittelgroße
 
 Am Ende dieser Kette steht der Befund, den die Aufstiegsfalle in einer Zahl sichtbar macht. Sie heißt Mindestlohn-Paradox. Wer Vollzeit zum gesetzlichen Mindestlohn arbeitet – also rund 27.000 Euro brutto im Jahr verdient – bekommt gegenüber dem Bürgergeld-Grundniveau effektiv 3,80 Euro pro Stunde als tatsächlichen Nettomehrwert. Das sind 29 Prozent des nominalen Mindestlohns. Für eine Alleinerziehende mit Kind liegt der Wert bei 5,10 Euro, also 40 Prozent. Wer also den 40-Stunden-Vertrag unterschreibt, weil „Arbeit sich lohnen muss“, verdient real ein gutes Drittel dessen, was auf dem Lohnzettel als Stundenlohn ausgewiesen ist.
 
-Der Rest geht an drei Adressaten gleichzeitig: an das Sozialsystem, das zurückzieht; an die Sozialversicherung, die einzieht; an das Finanzamt, das progressiv zugreift. Drei Mechanismen, in derselben Zone, ineinandergeschoben – ein Konstrukt, das historisch gewachsen ist und nie konsolidiert wurde.
+Der Rest geht an drei Stellen gleichzeitig. Das Sozialsystem rechnet Transfers an und kürzt sie, sobald Einkommen entsteht. Die Sozialversicherung verlangt parallel ihre Beiträge. Und das Finanzamt setzt obendrauf die Progression an. In derselben Einkommenszone wirken also drei Mechanismen übereinander, ohne dass sie je aufeinander abgestimmt worden wären. Die Konstruktion ist historisch so entstanden aber nie konsolidiert.
 
-Das ist die Theorie. Im nächsten Schritt muss sie an den Daten getestet werden.
+Stimmt das? Schauen wir nach.
 
 ## IV. Was die Daten zeigen
 
