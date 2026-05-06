@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: LinyingL/LinyingL.github.io
+  branch: main
+
+media_folder: "public/assets"
+public_folder: "/assets"
+
+# Optional: customize site URL
+site_url: "https://linyingl.github.io"
+
+collections:
+  - name: "posts"
+    label: "文章 (Posts)"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "标题 (Title)", name: "title", widget: "string" }
+      - { label: "描述 (Description)", name: "description", widget: "text", required: false }
+      - { label: "发布时间 (Publish Date)", name: "pubDate", widget: "datetime" }
+      - { label: "分类 (Category)", name: "category", widget: "string", required: false }
+      - { label: "副标题/标签名 (Kicker)", name: "kicker", widget: "string", required: false }
+      - { label: "标签 (Tags)", name: "tags", widget: "list", required: false }
+      - { label: "作者 (Author)", name: "author", widget: "string", required: false }
+      - { label: "草稿状态 (Draft)", name: "draft", widget: "boolean", default: true }
+      - { label: "正文内容 (Body)", name: "body", widget: "markdown" }
