@@ -962,6 +962,67 @@ main { flex: 1; }
 }
 
 /* =========================================================================
+   Comments (giscus)
+   ========================================================================= */
+
+.comments {
+  max-width: var(--container-narrow);
+  margin: 3.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-rule);
+}
+
+.comments__header {
+  margin-bottom: 1.5rem;
+}
+
+.comments__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem;
+}
+
+.comments__icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.comments__note {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-muted-2);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.comments__note a {
+  color: var(--color-accent-dark);
+  border-bottom: 1px solid var(--color-accent-soft);
+}
+
+.comments__note a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* giscus iframe — seamless integration */
+.giscus {
+  min-height: 150px;
+}
+
+.giscus iframe {
+  border: none !important;
+  width: 100% !important;
+  color-scheme: normal;
+}
+
+/* =========================================================================
    Utilities
    ========================================================================= */
 

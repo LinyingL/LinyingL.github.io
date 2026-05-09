@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Comments from '../components/Comments.astro';
 import BaseLayout from './BaseLayout.astro';
 import type { Post } from '../utils/posts';
 import {
@@ -60,6 +61,8 @@ const kicker = post.data.kicker ?? cat?.kicker ?? 'Article';
     <div class="prose" data-pagefind-body>
       <slot />
     </div>
+
+    <Comments />
 
     <footer class="post-footer">
       {post.data.tags.length > 0 && (
