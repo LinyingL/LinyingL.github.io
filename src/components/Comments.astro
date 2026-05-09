@@ -1,0 +1,98 @@
+---
+/**
+ * Comments component powered by giscus (https://giscus.app).
+ * Uses GitHub Discussions as backend — free, no database needed.
+ *
+ * Automatically syncs with the site's light/dark theme toggle.
+ */
+---
+
+<section class="comments" id="comments">
+  <div class="comments__header">
+    <h2 class="comments__title">
+      <svg class="comments__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      Comments
+    </h2>
+    <p class="comments__note">
+      Powered by <a href="https://giscus.app" target="_blank" rel="noopener">giscus</a> &middot; Sign in with GitHub to comment.
+    </p>
+  </div>
+
+  <div class="giscus"></div>
+</section>
+
+<script is:inline>
+  // Load giscus with the correct theme
+  function loadGiscus() {
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+    const giscusTheme = theme === 'dark' ? 'noborder_dark' : 'noborder_light';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'LinyingL/LinyingL.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDORZvAzA');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDORZvAzM4C8rAV');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', giscusTheme);
+    script.setAttribute('data-lang', 'en');
+    script.setAttribute('data-loading', 'lazy');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+
+    const container = document.querySelector('.giscus');
+    if (container) {
+      container.innerHTML = '';
+      container.appendChild(script);
+    }
+  }
+
+  // Sync giscus theme when the site theme toggle is clicked
+  function updateGiscusTheme() {
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+    const giscusTheme = theme === 'dark' ? 'noborder_dark' : 'noborder_light';
+
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: giscusTheme } } },
+        'https://giscus.app'
+      );
+    }
+  }
+
+  // Observe theme changes via MutationObserver on the html element
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-theme') {
+        updateGiscusTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true });
+
+  // Load giscus when section is near viewport (performance)
+  if ('IntersectionObserver' in window) {
+    const section = document.getElementById('comments');
+    if (section) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            loadGiscus();
+            io.disconnect();
+          }
+        },
+        { rootMargin: '200px' }
+      );
+      io.observe(section);
+    }
+  } else {
+    loadGiscus();
+  }
+</script>
