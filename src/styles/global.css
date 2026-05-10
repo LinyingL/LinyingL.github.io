@@ -597,6 +597,24 @@ main { flex: 1; }
   margin-top: 0.6rem;
 }
 
+.post-content-layout {
+  display: block;
+}
+@media (min-width: 1100px) {
+  .post-content-layout {
+    display: grid;
+    grid-template-columns: 1fr var(--container-narrow) 1fr;
+    gap: 2rem;
+  }
+  .post-content-layout > .prose {
+    grid-column: 2;
+    margin: 0;
+  }
+  .post-content-layout > .toc-sidebar {
+    grid-column: 3;
+  }
+}
+
 .prose {
   max-width: var(--container-narrow);
   margin: 0 auto;

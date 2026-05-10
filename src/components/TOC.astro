@@ -1,0 +1,81 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+// Filter to only include h2 and h3
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{toc.length > 0 && (
+  <aside class="toc-sidebar">
+    <nav class="toc-nav">
+      <h4 class="toc-nav__title">Table of Contents</h4>
+      <ul class="toc-nav__list">
+        {toc.map((heading) => (
+          <li class={`toc-nav__item toc-nav__item--depth-${heading.depth}`}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}
+
+<style>
+  .toc-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .toc-sidebar {
+      display: block;
+      position: sticky;
+      top: 5rem;
+      align-self: start;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+      padding-left: 2rem;
+      border-left: 1px solid var(--color-rule);
+    }
+
+    .toc-nav__title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: 1rem;
+    }
+
+    .toc-nav__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-nav__item {
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .toc-nav__item--depth-3 {
+      padding-left: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .toc-nav__item a {
+      color: var(--color-muted-2);
+      font-size: 0.9rem;
+      border-bottom: none;
+      transition: color var(--t-fast);
+      display: block;
+    }
+
+    .toc-nav__item a:hover {
+      color: var(--color-accent-dark);
+    }
+  }
+</style>
