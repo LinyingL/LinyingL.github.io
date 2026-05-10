@@ -703,6 +703,18 @@ main { flex: 1; }
   max-width: 40rem;
   margin-inline: auto;
 }
+
+/* Fix for TOC overlap: When the post layout has a right sidebar (>=1100px), 
+   break out .wide charts exclusively to the LEFT into the empty space. */
+@media (min-width: 1100px) {
+  .post-content-layout .prose figure.wide,
+  .post-content-layout .prose .wide {
+    left: auto;
+    right: 0;
+    transform: none;
+    width: min(64rem, calc(50vw + 17rem));
+  }
+}
 .prose a {
   color: var(--color-accent-dark);
   border-bottom: 1px solid var(--color-accent-soft);
