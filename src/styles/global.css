@@ -595,8 +595,6 @@ main { flex: 1; }
   font-size: 0.8rem;
   color: var(--color-muted);
   margin-top: 0.6rem;
-.post-content-layout {
-  display: block;
 }
 
 .prose {
@@ -671,6 +669,9 @@ main { flex: 1; }
   text-align: center;
 }
 
+/* .wide — breakout figure for charts that need horizontal room.
+   Uses position:relative + translateX to recenter a child wider than
+   its parent (margin:auto doesn't handle over-wide children). */
 .prose figure.wide,
 .prose .wide {
   position: relative;
@@ -679,15 +680,6 @@ main { flex: 1; }
   width: min(64rem, calc(100vw - 3rem));
   max-width: none;
   margin: 2.5rem 0;
-}
-
-/* Dynamically shrink wide charts when the left TOC is present (>=1200px) 
-   so they stay perfectly centered but never overlap the left sidebar. */
-@media (min-width: 1200px) {
-  .prose figure.wide,
-  .prose .wide {
-    width: min(64rem, calc(100vw - 34rem));
-  }
 }
 .prose figure.wide figcaption {
   max-width: 40rem;

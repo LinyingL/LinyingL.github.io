@@ -1,8 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Comments from '../components/Comments.astro';
-import TOC from '../components/TOC.astro';
-import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import type { Post } from '../utils/posts';
 import {
@@ -13,8 +11,8 @@ import {
   tagSlug,
 } from '../utils/posts';
 
-interface Props { post: Post; body: string; headings?: MarkdownHeading[] }
-const { post, body, headings = [] } = Astro.props;
+interface Props { post: Post; body: string }
+const { post, body } = Astro.props;
 const cat = getCategoryMeta(post.data.category);
 const rt = readingTime(body);
 const { newer, older } = await getAdjacentPosts(post);
@@ -60,11 +58,8 @@ const kicker = post.data.kicker ?? cat?.kicker ?? 'Article';
       </figure>
     )}
 
-    <div class="post-content-layout">
-      <div class="prose" data-pagefind-body>
-        <slot />
-      </div>
-      {headings.length > 0 && <TOC headings={headings} />}
+    <div class="prose" data-pagefind-body>
+      <slot />
     </div>
 
     <Comments />
