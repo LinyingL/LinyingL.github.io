@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Comments from '../components/Comments.astro';
+import ShareButtons from '../components/ShareButtons.astro';
 import BaseLayout from './BaseLayout.astro';
 import type { Post } from '../utils/posts';
 import {
@@ -65,6 +66,8 @@ const kicker = post.data.kicker ?? cat?.kicker ?? 'Article';
     <Comments />
 
     <footer class="post-footer">
+      <ShareButtons title={post.data.title} url={Astro.url.href} />
+
       {post.data.tags.length > 0 && (
         <div class="tag-row">
           {post.data.tags.map((t) => (
