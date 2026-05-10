@@ -30,16 +30,22 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     display: none;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1200px) {
     .toc-sidebar {
       display: block;
-      position: sticky;
-      top: 5rem;
-      align-self: start;
-      max-height: calc(100vh - 6rem);
+      position: fixed;
+      top: 6rem;
+      left: max(1rem, calc(50vw - 38rem));
+      width: 14rem;
+      max-height: calc(100vh - 8rem);
       overflow-y: auto;
-      padding-left: 2rem;
-      border-left: 1px solid var(--color-rule);
+      padding-right: 1rem;
+      border-right: 1px solid var(--color-rule);
+      z-index: 10;
+      /* Add a subtle backdrop blur so it stays readable if anything scrolls under it */
+      background: color-mix(in srgb, var(--color-paper) 80%, transparent);
+      backdrop-filter: blur(8px);
+      border-radius: 2px;
     }
 
     .toc-nav__title {
