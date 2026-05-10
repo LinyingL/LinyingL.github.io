@@ -1,0 +1,116 @@
+{
+  "name": "beijing-centralized-by-letting-go",
+  "title": "How Beijing Centralized by Letting Go — Data Package",
+  "description": "Reproducibility dataset for the article 'How Beijing Centralized by Letting Go,' tracking China's central-to-local fiscal architecture from 2013 through 2026. Built from Ministry of Finance Budget Department final-account and budget tables, Treasury Department fiscal status releases, and National Bureau of Statistics nominal GDP figures.",
+  "version": "1.1.0",
+  "created": "2026-05-10",
+  "homepage": "https://linyingl.github.io/posts/how-beijing-centralized-by-letting-go/",
+  "license": {
+    "name": "CC-BY-4.0",
+    "title": "Creative Commons Attribution 4.0 International",
+    "path": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "contributors": [
+    {
+      "title": "Linying Li",
+      "role": "author"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Central-to-Local Transfer Payment Final Account Tables, 2013-2024",
+      "publisher": "Ministry of Finance Budget Department, People's Republic of China",
+      "url": "http://yss.mof.gov.cn/",
+      "accessed": "2026-05-10"
+    },
+    {
+      "title": "Local General Public Budget Revenue Final Account Tables, 2013-2024",
+      "publisher": "Ministry of Finance Budget Department, People's Republic of China",
+      "url": "http://yss.mof.gov.cn/",
+      "accessed": "2026-05-10"
+    },
+    {
+      "title": "Local Government-managed Funds Revenue Final Account Tables, 2018-2024",
+      "publisher": "Ministry of Finance Budget Department, People's Republic of China",
+      "url": "http://yss.mof.gov.cn/",
+      "accessed": "2026-05-10"
+    },
+    {
+      "title": "2025 Fiscal Status Release, January 2026",
+      "publisher": "Ministry of Finance Treasury Department, People's Republic of China",
+      "url": "http://gks.mof.gov.cn/tongjishuju/202601/t20260130_3982923.htm",
+      "accessed": "2026-05-10"
+    },
+    {
+      "title": "2026 Central-to-Local Transfer Payment Budget Tables",
+      "publisher": "Ministry of Finance Budget Department, People's Republic of China",
+      "url": "http://yss.mof.gov.cn/2026zyczys/202603/t20260324_3986014.htm",
+      "accessed": "2026-05-10"
+    },
+    {
+      "title": "China nominal GDP, current prices, 2013-2024",
+      "publisher": "National Bureau of Statistics of China",
+      "url": "https://data.stats.gov.cn/",
+      "accessed": "2026-05-10"
+    }
+  ],
+  "resources": [
+    {
+      "name": "province-level-2024",
+      "path": "data/1_province_level_2024.xlsx",
+      "title": "Province-level central-to-local transfer payment composition, 2024",
+      "description": "All 31 provincial-level governments plus Xinjiang Production and Construction Corps. Decomposes 2024 central transfers into general transfer, shared fiscal responsibility (subset of general), and special-purpose transfer.",
+      "unit": "100 million RMB (亿元) unless noted",
+      "format": "xlsx",
+      "encoding": "utf-8"
+    },
+    {
+      "name": "national-time-series",
+      "path": "data/2_national_time_series_2013_2026.xlsx",
+      "title": "National transfer-payment composition time series, 2013-2026",
+      "description": "Comparable national totals across 14 years. Pre-2019 tax rebates were a separate row; the comparable totals here add them back into the transfer total for consistency across the 2019 reclassification break.",
+      "unit": "100 million RMB (亿元); shares in percent",
+      "format": "xlsx",
+      "encoding": "utf-8"
+    },
+    {
+      "name": "local-self-sufficiency",
+      "path": "data/3_local_self_sufficiency_2013_2026.xlsx",
+      "title": "Local fiscal self-sufficiency and dependency, 2013-2026",
+      "description": "Year-by-year decomposition of local general public budget into own-source revenue, central transfer payments, transferred-in funds, and deficit. Derives self-sufficiency rate and dependency rate as shares of total local expenditure.",
+      "unit": "100 million RMB (亿元); rates in percent",
+      "format": "xlsx",
+      "encoding": "utf-8"
+    },
+    {
+      "name": "revised-evidence",
+      "path": "data/4_revised_evidence.xlsx",
+      "title": "Revised-body evidence: property channel, central-local share, and pass-through",
+      "description": "Empirical support for the article's revised causal account. Six sheets: property-related local taxes 2013-2024; land sale revenue 2018-2024; central-local revenue share and revenue/GDP decomposition 2013 vs 2024; central transfers as share of central revenue 2013-2024; cross-budget transferred-in funds (调入资金) 2013-2024; sources and methodology.",
+      "unit": "100 million RMB (亿元) unless noted; shares in percent; GDP in trillion RMB",
+      "format": "xlsx",
+      "encoding": "utf-8"
+    }
+  ],
+  "methodology": {
+    "self_sufficiency": "Local own-source general public budget revenue divided by local total general public budget expenditure.",
+    "dependency": "Central-to-local transfer payments (including tax rebates) divided by local total general public budget expenditure.",
+    "discretionary_share": "(General transfer minus tax rebate minus shared fiscal responsibility transfer) divided by total transfer payment. Reportable from 2019 onward, when shared fiscal responsibility transfers were first separated as a distinct line item.",
+    "caliber_breaks": [
+      "2014 special-purpose grant consolidation: hundreds of earmarked transfers were folded into broader categories. Affects category-level comparisons across 2014-2016 but not the totals.",
+      "2019 separation of shared fiscal responsibility: previously distributed across multiple subcategories of general transfer, this category was given its own line in 2019. The level of central-mandated spending was unchanged; only the reporting structure changed.",
+      "Tax rebate accounting: pre-2019 reported as separate row; post-2019 bundled into the general transfer line as 'tax rebates and fixed subsidies'. The comparable totals used in this dataset reconstruct a consistent envelope across the break by adding pre-2019 tax rebates back into the transfer total."
+    ],
+    "missing_value_convention": "Cells marked '—' or 'N/A' indicate the figure is not separately reported in the source for that year (typically because the category did not exist or was bundled elsewhere). Cells left blank indicate the data point was not part of the published source."
+  },
+  "keywords": [
+    "China",
+    "public finance",
+    "central-local relations",
+    "vertical fiscal imbalance",
+    "transfer payments",
+    "fiscal federalism",
+    "land finance",
+    "VAT reform"
+  ]
+}

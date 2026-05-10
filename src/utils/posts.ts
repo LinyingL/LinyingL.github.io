@@ -7,7 +7,7 @@ const isProd = import.meta.env.PROD;
 
 export async function getAllPosts(): Promise<Post[]> {
   const posts = await getCollection('posts', ({ data }) =>
-    isProd ? !data.draft : true
+    isProd ? !data.draft && !data.unlisted : true
   );
   return posts.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
