@@ -27,7 +27,7 @@
   // Load giscus with the correct theme
   function loadGiscus() {
     const theme = document.documentElement.getAttribute('data-theme') || 'light';
-    const giscusTheme = theme === 'dark' ? 'noborder_dark' : 'noborder_light';
+    const giscusTheme = theme === 'dark' ? 'dark' : 'light';
 
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
@@ -56,7 +56,7 @@
   // Sync giscus theme when the site theme toggle is clicked
   function updateGiscusTheme() {
     const theme = document.documentElement.getAttribute('data-theme') || 'light';
-    const giscusTheme = theme === 'dark' ? 'noborder_dark' : 'noborder_light';
+    const giscusTheme = theme === 'dark' ? 'dark' : 'light';
 
     const iframe = document.querySelector('iframe.giscus-frame');
     if (iframe) {

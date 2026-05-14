@@ -1014,12 +1014,24 @@ main { flex: 1; }
 /* giscus iframe — seamless integration */
 .giscus {
   min-height: 150px;
+  background: var(--color-paper);
+  border-radius: 4px;
 }
 
 .giscus iframe {
   border: none !important;
   width: 100% !important;
   color-scheme: normal;
+}
+
+/* Prevent dark system color-scheme from bleeding into giscus in light mode */
+[data-theme="light"] .giscus,
+[data-theme="light"] .giscus iframe {
+  color-scheme: light;
+}
+[data-theme="dark"] .giscus,
+[data-theme="dark"] .giscus iframe {
+  color-scheme: dark;
 }
 
 /* =========================================================================
