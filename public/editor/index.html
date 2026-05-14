@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="description" content="Mobile blog editor for linyingl.github.io — edit Markdown, manage frontmatter, and publish directly from your phone.">
+  <title>Blog Editor — Linying Li</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- ========== LOGIN SCREEN ========== -->
+  <div id="screen-login" class="screen active">
+    <div class="login-container">
+      <div class="login-logo">
+        <div class="logo-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            <path d="M2 2l7.586 7.586"/>
+            <circle cx="11" cy="11" r="2"/>
+          </svg>
+        </div>
+        <h1 class="login-title">Blog Editor</h1>
+        <p class="login-subtitle">为 linyingl.github.io 打造的手机编辑器</p>
+      </div>
+      <form id="login-form" class="login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="github-token">GitHub Personal Access Token</label>
+          <div class="input-wrapper">
+            <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxx" required autocomplete="off">
+            <button type="button" id="toggle-token-vis" class="btn-icon" aria-label="显示/隐藏">
+              <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="icon-eye-off hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          <p class="form-hint">需要 <code>repo</code> 权限的 token。<a href="https://github.com/settings/tokens/new?scopes=repo&description=Blog+Editor+Mobile" target="_blank" rel="noopener">点此创建 →</a></p>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="btn-login">
+          <span class="btn-text">连接 GitHub</span>
+          <span class="btn-loader hidden"><span class="spinner"></span></span>
+        </button>
+        <p id="login-error" class="form-error hidden"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== POSTS LIST SCREEN ========== -->
+  <div id="screen-posts" class="screen">
+    <header class="app-header">
+      <div class="header-left">
+        <h2 class="header-title">文章列表</h2>
+      </div>
+      <div class="header-right">
+        <button id="btn-refresh" class="btn-icon" aria-label="刷新">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <button id="btn-new-post" class="btn-icon btn-accent" aria-label="新建文章">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button id="btn-logout" class="btn-icon" aria-label="退出">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="搜索文章…" autocomplete="off">
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-filter="all">全部</button>
+      <button class="filter-tab" data-filter="published">已发布</button>
+      <button class="filter-tab" data-filter="draft">草稿</button>
+      <button class="filter-tab" data-filter="unlisted">未列出</button>
+    </div>
+
+    <div id="posts-list" class="posts-list">
+      <div class="loading-state">
+        <span class="spinner large"></span>
+        <p>加载文章中…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EDITOR SCREEN ========== -->
+  <div id="screen-editor" class="screen">
+    <header class="app-header editor-header">
+      <div class="header-left">
+        <button id="btn-back" class="btn-icon" aria-label="返回">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
+        <span id="editor-filename" class="header-subtitle"></span>
+      </div>
+      <div class="header-right">
+        <button id="btn-preview-toggle" class="btn-icon" aria-label="预览">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <button id="btn-save" class="btn btn-primary btn-sm" disabled>
+          <span class="btn-text">提交</span>
+          <span class="btn-loader hidden"><span class="spinner"></span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Frontmatter panel -->
+    <div id="frontmatter-panel" class="frontmatter-panel">
+      <button id="btn-toggle-fm" class="fm-toggle">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        <span>文章属性 (Frontmatter)</span>
+        <span id="fm-status" class="fm-status"></span>
+      </button>
+      <div id="fm-fields" class="fm-fields collapsed">
+        <div class="fm-row">
+          <label for="fm-title">标题</label>
+          <input type="text" id="fm-title" placeholder="文章标题">
+        </div>
+        <div class="fm-row">
+          <label for="fm-description">描述</label>
+          <textarea id="fm-description" rows="2" placeholder="简短描述，用于列表和社交卡片"></textarea>
+        </div>
+        <div class="fm-row fm-row-half">
+          <div>
+            <label for="fm-date">日期</label>
+            <input type="date" id="fm-date">
+          </div>
+          <div>
+            <label for="fm-category">分类</label>
+            <select id="fm-category">
+              <option value="economics">Economics</option>
+              <option value="politics">Politics</option>
+              <option value="international-relations">International Relations</option>
+            </select>
+          </div>
+        </div>
+        <div class="fm-row">
+          <label for="fm-tags">标签 <span class="hint">(逗号分隔)</span></label>
+          <input type="text" id="fm-tags" placeholder="inflation, central-banks">
+        </div>
+        <div class="fm-row">
+          <label for="fm-kicker">Kicker <span class="hint">(可选)</span></label>
+          <input type="text" id="fm-kicker" placeholder="覆盖分类标签的文字">
+        </div>
+        <div class="fm-row fm-row-checks">
+          <label class="check-label">
+            <input type="checkbox" id="fm-draft">
+            <span>草稿</span>
+          </label>
+          <label class="check-label">
+            <input type="checkbox" id="fm-featured">
+            <span>推荐</span>
+          </label>
+          <label class="check-label">
+            <input type="checkbox" id="fm-unlisted">
+            <span>未列出</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor area -->
+    <div id="editor-container" class="editor-container">
+      <!-- Toolbar -->
+      <div id="editor-toolbar" class="editor-toolbar">
+        <button data-action="bold" title="粗体"><strong>B</strong></button>
+        <button data-action="italic" title="斜体"><em>I</em></button>
+        <button data-action="heading" title="标题">H</button>
+        <button data-action="link" title="链接">🔗</button>
+        <button data-action="image" title="图片">🖼</button>
+        <button data-action="quote" title="引用">❝</button>
+        <button data-action="code" title="代码">&lt;/&gt;</button>
+        <button data-action="list-ul" title="无序列表">•</button>
+        <button data-action="list-ol" title="有序列表">1.</button>
+        <button data-action="hr" title="分割线">—</button>
+        <button data-action="table" title="表格">▦</button>
+        <button data-action="footnote" title="脚注">※</button>
+      </div>
+
+      <textarea id="editor-textarea" class="editor-textarea" placeholder="在此撰写 Markdown 内容…" spellcheck="false"></textarea>
+
+      <!-- Preview pane -->
+      <div id="preview-pane" class="preview-pane hidden">
+        <div id="preview-content" class="preview-content"></div>
+      </div>
+    </div>
+
+    <!-- Commit dialog -->
+    <div id="commit-dialog" class="dialog-overlay hidden">
+      <div class="dialog">
+        <h3>提交更改</h3>
+        <div class="form-group">
+          <label for="commit-message">提交信息</label>
+          <input type="text" id="commit-message" placeholder="更新文章内容">
+        </div>
+        <div class="dialog-actions">
+          <button id="btn-cancel-commit" class="btn btn-ghost">取消</button>
+          <button id="btn-confirm-commit" class="btn btn-primary">
+            <span class="btn-text">提交 & 推送</span>
+            <span class="btn-loader hidden"><span class="spinner"></span></span>
+          </button>
+        </div>
+        <p id="commit-error" class="form-error hidden"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- New post dialog -->
+  <div id="new-post-dialog" class="dialog-overlay hidden">
+    <div class="dialog">
+      <h3>新建文章</h3>
+      <div class="form-group">
+        <label for="new-post-slug">URL Slug</label>
+        <input type="text" id="new-post-slug" placeholder="my-new-article" pattern="[a-z0-9\-]+" autocomplete="off">
+        <p class="form-hint">文件名，将变成 URL 路径：/posts/<span id="slug-preview">my-new-article</span>/</p>
+      </div>
+      <div class="form-group">
+        <label for="new-post-title">文章标题</label>
+        <input type="text" id="new-post-title" placeholder="我的新文章" autocomplete="off">
+      </div>
+      <div class="dialog-actions">
+        <button id="btn-cancel-new" class="btn btn-ghost">取消</button>
+        <button id="btn-create-post" class="btn btn-primary">创建</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden">
+    <span id="toast-msg"></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

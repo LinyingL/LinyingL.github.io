@@ -1,0 +1,17 @@
+{
+  "name": "blog-editor",
+  "short_name": "Blog Editor",
+  "description": "Mobile blog editor for linyingl.github.io",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23e85d4a'/%3E%3Cpath d='M96 140l56-56 24 24-56 56-24-24z' fill='none' stroke='white' stroke-width='8'/%3E%3Cpath d='M144 84l-12-60L16 16l28 116 56 8 40-40z' fill='none' stroke='white' stroke-width='8'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
