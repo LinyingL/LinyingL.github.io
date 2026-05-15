@@ -85,3 +85,29 @@ Disallow: /
 # DF Bot — AI training
 User-agent: DF Bot
 Disallow: /
+
+# Alibaba — Qwen model training
+User-agent: QwenBot
+Disallow: /
+User-agent: TongyiBot
+Disallow: /
+User-agent: AliyunBot
+Disallow: /
+
+# Baidu — ERNIE model training (does NOT affect Baidu Search)
+User-agent: ERNIEBot
+Disallow: /
+User-agent: YiyanBot
+Disallow: /
+
+# DeepSeek — AI model training
+User-agent: DeepSeekBot
+Disallow: /
+
+# Zhipu AI — ChatGLM model training
+User-agent: ChatGLM-Spider
+Disallow: /
+
+# MiniMax — AI model training
+User-agent: MiniMaxBot
+Disallow: /
