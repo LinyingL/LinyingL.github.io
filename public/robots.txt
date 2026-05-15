@@ -1,111 +1,87 @@
 # ============================================================
 # robots.txt — linyingl.github.io
 # ============================================================
-# Policy: allow normal search engines; block AI training bots.
+# Policy: allow all search engines and retrieval bots;
+#         block only bots used for AI model training.
 # ============================================================
 
-# Search engines — welcome
 User-agent: *
 Allow: /
 
 Sitemap: https://linyingl.github.io/sitemap-index.xml
 
 # =========================
-# AI training crawlers
+# AI model training bots
 # =========================
 
-# OpenAI
+# OpenAI — training data collection
 User-agent: GPTBot
 Disallow: /
-User-agent: ChatGPT-User
-Disallow: /
-User-agent: OAI-SearchBot
-Disallow: /
 
-# Anthropic
-User-agent: anthropic-ai
-Disallow: /
-User-agent: Claude-Web
-Disallow: /
-User-agent: ClaudeBot
-Disallow: /
-
-# Google AI training (keeps Google Search working)
+# Google — Gemini model training (does NOT affect Google Search)
 User-agent: Google-Extended
 Disallow: /
 
-# Apple AI training
+# Anthropic — training data collection
+User-agent: anthropic-ai
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: Claude-Web
+Disallow: /
+
+# Apple — Apple Intelligence training
 User-agent: Applebot-Extended
 Disallow: /
 
-# Meta
+# Meta — AI model training
 User-agent: Meta-ExternalAgent
 Disallow: /
 User-agent: Meta-ExternalFetcher
 Disallow: /
-User-agent: FacebookBot
-Disallow: /
 
-# Amazon
-User-agent: Amazonbot
-Disallow: /
-
-# Microsoft / Bing AI
-User-agent: Bingbot-AI
-Disallow: /
-
-# Perplexity
-User-agent: PerplexityBot
-Disallow: /
-
-# Cohere
+# Cohere — AI model training
 User-agent: cohere-ai
 Disallow: /
 
-# Common Crawl (often used for AI datasets)
+# Common Crawl — widely used for AI training datasets
 User-agent: CCBot
 Disallow: /
 
-# Bytedance / TikTok
+# Bytedance — AI model training
 User-agent: Bytespider
 Disallow: /
 
-# Yandex AI
-User-agent: YandexBot
-Disallow: /
-
-# Siri / Apple
-User-agent: Diffbot
-Disallow: /
-
-# AI search / scraper bots
-User-agent: Omgili
-Disallow: /
-User-agent: Omgilibot
-Disallow: /
-User-agent: YouBot
-Disallow: /
-User-agent: Scrapy
-Disallow: /
-User-agent: Timpibot
-Disallow: /
-User-agent: VelenPublicWebCrawler
-Disallow: /
+# AI2 (Allen Institute) — AI training datasets
 User-agent: Ai2Bot
 Disallow: /
 User-agent: Ai2Bot-Dolma
 Disallow: /
-User-agent: Kangaroo Bot
+
+# Diffbot — data extraction for AI training
+User-agent: Diffbot
 Disallow: /
+
+# img2dataset — image scraping for AI training
 User-agent: img2dataset
 Disallow: /
-User-agent: ISSCyberRiskCrawler
-Disallow: /
-User-agent: DF Bot
-Disallow: /
+
+# Webzio — data collection for AI training
 User-agent: Webzio-Extended
 Disallow: /
-User-agent: PetalBot
+
+# Timpi — decentralized AI training data
+User-agent: Timpibot
 Disallow: /
-User-agent: SemrushBot
+
+# Kangaroo Bot — AI training
+User-agent: Kangaroo Bot
+Disallow: /
+
+# iCyber risk crawler — data collection
+User-agent: ISSCyberRiskCrawler
+Disallow: /
+
+# DF Bot — AI training
+User-agent: DF Bot
 Disallow: /
