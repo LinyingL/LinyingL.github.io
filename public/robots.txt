@@ -2,6 +2,8 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://linyingl.github.io/sitemap-index.xml
+
 # Block OpenAI (ChatGPT and training bots)
 User-agent: GPTBot
 Disallow: /
