@@ -19,9 +19,10 @@ export const SITE = {
 // Edit freely. Plain text or inline HTML both work.
 export const INTRO = {
   heading: 'Linying Li',
-  body: `A data journalism blog on political economy and international
-    relations, written from the conviction that empirical evidence and
-    political theory belong in the same conversation.`,
+  body: `I write long pieces about political economy and international
+    relations — usually the cases where the data quietly contradicts
+    the obvious story. If that's your kind of reading, the archive is
+    the best place to start.`,
   aboutLabel: 'More about me',
   aboutHref: '/about/',
 } as const;
