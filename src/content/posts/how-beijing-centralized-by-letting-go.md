@@ -104,13 +104,4 @@ Self-sufficiency is defined as local own-source general public budget revenue di
 
 The four 100-percent-local property and land taxes used in the property-channel calculation are 契税 (deed tax), 土地增值税 (land value-added tax), 房产税 (property tax), and 城镇土地使用税 (urban land use tax), each extracted from the annual _Local General Public Budget Revenue Final Account Tables_ line items. Land sale revenue (国有土地使用权出让金收入) is taken from the _Local Government-managed Funds Revenue Final Account Tables_. Central-level revenue and central-to-local transfer payment ratios are computed from the corresponding central-government tables.
 
-**Data and code** · All four datasets and the Python scripts that produced the figures are bundled with this post under [CC BY 4.0](/assets/how-beijing-centralized-by-letting-go/LICENSE):
 
-- Province-level transfer composition, 2024: [`1_province_level_2024.xlsx`](/assets/how-beijing-centralized-by-letting-go/data/1_province_level_2024.xlsx)
-- National time series, 2013–2026: [`2_national_time_series_2013_2026.xlsx`](/assets/how-beijing-centralized-by-letting-go/data/2_national_time_series_2013_2026.xlsx)
-- Local self-sufficiency and dependency, 2013–2026: [`3_local_self_sufficiency_2013_2026.xlsx`](/assets/how-beijing-centralized-by-letting-go/data/3_local_self_sufficiency_2013_2026.xlsx)
-- Revised-evidence sheets (property channel, central-local share, pass-through, 调入资金): [`4_revised_evidence.xlsx`](/assets/how-beijing-centralized-by-letting-go/data/4_revised_evidence.xlsx)
-- Python scripts (rebuild every figure from the source data): [`code/`](/assets/how-beijing-centralized-by-letting-go/code/)
-- Frictionless Data Package metadata: [`datapackage.json`](/assets/how-beijing-centralized-by-letting-go/datapackage.json)
-
-Each xlsx leads with a `_metadata` sheet documenting the dataset's source, accessed date, units, methodology, and caliber breaks. The raw Ministry of Finance figures are public-domain government statistics; the derived analyses fall under the post's CC BY 4.0 license.
