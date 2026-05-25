@@ -476,9 +476,11 @@ def figur_2_lohnverbleibsquote():
     idx_cliff = np.where(spike_mask)[0]
     if len(idx_cliff) > 0:
         x_cliff = xm[idx_cliff[0]]
-        rb[spike_mask] = np.nan
+        y_cliff = rb[idx_cliff[0]-1]
+        rb[spike_mask] = y_cliff
     else:
         x_cliff = None
+        y_cliff = None
         
     bx=xf[bg_end]; mlx=ML_VZ/AVG_WAGE
 
@@ -512,8 +514,8 @@ def figur_2_lohnverbleibsquote():
                 bbox=dict(boxstyle="round,pad=0.25",fc=BG_COL,ec=C_DEAD,lw=.6,alpha=.95))
 
     if x_cliff is not None:
-        ax.plot(x_cliff, 0, marker="v", color=C_DEAD, markersize=8, zorder=13)
-        ax.annotate("BuT-Klippe: −1.075€/Jahr", xy=(x_cliff, -2), xytext=(x_cliff + 0.05, -12),
+        ax.plot(x_cliff, y_cliff, marker="v", color=C_DEAD, markersize=8, zorder=13)
+        ax.annotate("BuT-Klippe: −1.075€/Jahr", xy=(x_cliff, y_cliff - 2), xytext=(x_cliff + 0.05, y_cliff - 15),
                     color=C_DEAD, fontsize=8.5, fontweight="bold", alpha=0.90, zorder=12,
                     arrowprops=dict(arrowstyle="->", color=C_DEAD, lw=1.2),
                     bbox=dict(boxstyle="round,pad=0.25", fc=BG_COL, ec=C_DEAD, lw=0.6, alpha=0.95),
