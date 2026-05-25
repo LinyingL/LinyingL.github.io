@@ -1,5 +1,5 @@
 """
-Arbeit muss sich lohnen - Abbildungen 1-4 (Status quo 2025, ohne UBI)
+Arbeit muss sich lohnen - Abbildungen 1-4 (Status quo 2025)
 =====================================================================
 Erzeugt die vier getrennten Grafiken des Artikels:
   figur_1_einkommen()          Abb. 1  Verfuegbares Einkommen
@@ -325,7 +325,7 @@ nvUA=np.zeros(N); nvUB=np.zeros(N); roiUA=np.zeros(N); roiUB=np.zeros(N)
 EPS=1.0   # 1€ Schrittweite für numerische Ableitung
 
 for i,b in enumerate(brutto):
-    # ── Verfügbares Einkommen ──
+    # Verfügbares Einkommen
     nvA[i]=verfuegbar_A(b)
     nvB[i]=verfuegbar_B(b)
     ntA[i]=netto_fn(b, kinderlos=True)
@@ -333,9 +333,9 @@ for i,b in enumerate(brutto):
     # UBI-Reform
     nvUA[i]=verfuegbar_UBI_A(b)
     nvUB[i]=verfuegbar_UBI_B(b)
-    # ── Marginale Arbeitsrendite (numerisch) ──
-    #    ROI = ΔVerfügbar / ΔArbeitgeberkosten × 100
-    #    Erfasst automatisch alle Cliff-Effekte:
+    # Marginale Arbeitsrendite (numerisch)
+    # ROI = ΔVerfügbar / ΔArbeitgeberkosten × 100
+    # Erfasst automatisch alle Cliff-Effekte:
     #    BG-Entzug, WG-Auslauf, KiZ-Entzug, BuT-Verlust, NB-Verlust
     dag=(ag_kosten(b+EPS)-ag_kosten(b))/EPS
     dag_UBI=(ag_kosten(b+EPS, minijob=MINIJOB_UBI)-ag_kosten(b, minijob=MINIJOB_UBI))/EPS
@@ -471,7 +471,7 @@ def figur_2_lohnverbleibsquote():
     xlim=(0.,2.5); m=(xf>=xlim[0])&(xf<=xlim[1])
     xm=xf[m]; ra=roiA[m]; rb=roiB[m].copy()
     
-    # Spitze (BuT-Klippe) entfernen und durch Marker ersetzen
+    # BuT-Klippe durch Marker ersetzen
     spike_mask = rb < -15
     idx_cliff = np.where(spike_mask)[0]
     if len(idx_cliff) > 0:
@@ -552,8 +552,7 @@ def figur_2_lohnverbleibsquote():
 def figur_3_wasserfall():
 
     # ═══════════ ABBILDUNG 4 – Wasserfall: Was von 600 € übrig bleibt ═══════════
-    # Werte = finalisierte Modellrechnung (deutschland_steuer_v8, 26.700 -> 33.900 EUR/J),
-    # identisch zum korrigierten Artikeltext.
+    # Werte = finalisierte Modellrechnung (26.700 -> 33.900 EUR/J)
     W_BRUTTO=600; W_WG=-165; W_KIZ=-60; W_BUT=-90; W_SV=-125; W_LST=-115
     W_NETTO=W_BRUTTO+W_WG+W_KIZ+W_BUT+W_SV+W_LST   # = 45
 
@@ -696,7 +695,7 @@ def figur_4_oecd():
     # ══════════════════════════════════════════════════════════════════════════════
     # STEUERFUNKTIONEN DEUTSCHLAND (§32a EStG 2025)
     # ══════════════════════════════════════════════════════════════════════════════
-    APW      = 50_257    # OECD-Durchschnittslohn DE 2025 (Schätzung)
+    APW      = 50_257    # OECD-Durchschnittslohn DE 2025 
     GFB      = 12_096    # Grundfreibetrag 2025
     Z2       = 17_443    # Ende Zone 2 (1. Progressionszone)
     Z3       = 68_480    # Ende Zone 3 (2. Progressionszone)
