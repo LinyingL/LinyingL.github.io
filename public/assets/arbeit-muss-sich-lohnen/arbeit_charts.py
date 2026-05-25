@@ -1,5 +1,5 @@
 """
-Arbeit muss sich lohnen - Abbildungen 1-4 (Status quo 2025)
+Arbeit muss sich lohnen - Abbildungen 1-4 (Stand: 2025)
 =====================================================================
 Erzeugt die vier getrennten Grafiken des Artikels:
   figur_1_einkommen()          Abb. 1  Verfuegbares Einkommen
@@ -449,7 +449,7 @@ def figur_1_einkommen():
           Patch(facecolor=C_DEAD,alpha=.12,label="Tote Zone (0 % Ertrag)")]
     ax1.legend(handles=leg1,loc="upper left",facecolor=PANEL2,edgecolor=LGRAY,
                fontsize=8.5,framealpha=.95)
-    ax1.set_title("Verfügbares Einkommen — Aufstiegsfalle im unteren Lohnbereich (Status quo 2025)",
+    ax1.set_title("Verfügbares Einkommen — Aufstiegsfalle im unteren Lohnbereich (Stand: 2025)",
         fontsize=15,fontweight="bold",pad=30,color=WHITE)
     ax1.annotate("© Linying Li", xy=(1.0,-0.085), xycoords='axes fraction',
                  ha='right', va='top', fontsize=12, color=DIMW, alpha=0.65,
@@ -1367,7 +1367,7 @@ def figur_4_oecd():
     ax.set_xlim(*xlim)
     ax.set_ylim(*ylim)
     ax.set_xlabel("Vielfaches des nationalen Durchschnittslohns (APW-Multiple)  "
-                  f"— DE: 1,0x = {APW:,} € p.a. (Quelle: OECD 2024)",
+                  f"— DE: 1,0x = {AVG_WAGE/1e3:.1f} € p.a. (Quelle: OECD)",
                   fontsize=10, labelpad=10, color=SUBTEXT)
     ax.set_ylabel("Marginale Grenzbelastung [%]\n(Einkommensteuer + AN-Sozialabgaben)",
                   fontsize=10, labelpad=10, color=SUBTEXT)
