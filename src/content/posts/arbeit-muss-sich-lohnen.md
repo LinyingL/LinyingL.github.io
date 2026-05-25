@@ -236,4 +236,4 @@ In die Lohnverbleibsquote gehen Regelbedarf, Kosten der Unterkunft, Mehrbedarf f
 
 Die Werte zur Kapitalbesteuerung beziehen sich auf die seit 2009 geltende Abgeltungsteuer ([§ 32d EStG](https://www.gesetze-im-internet.de/estg/__32d.html)) und auf die zehnjährige Spekulationsfrist für Immobilien ([§ 23 EStG](https://www.gesetze-im-internet.de/estg/__23.html)). Die Daten zur Vermögensverteilung und die zitierten Schätzungen zu potenziellen Steuermehreinnahmen entstammen den Modellierungen des DIW ([Bach & Eichfelder, 2021](https://www.diw.de/documents/publikationen/73/diw_01.c.821121.de/21-27-3.pdf)). Wie hoch die tatsächlichen Steuerausfälle durch die geltenden Privilegien sind, hängt methodisch davon ab, wie man Ausweichreaktionen in einer hypothetischen Besteuerung modelliert.
 
-Quellcode der Diagramme: [arbeit_charts.py](/assets/arbeit-muss-sich-lohnen/arbeit_charts.py).
+Python Code: [arbeit_charts.py](/assets/arbeit-muss-sich-lohnen/arbeit_charts.py).
