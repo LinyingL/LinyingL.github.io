@@ -95,7 +95,7 @@ Das Problem entsteht durch die Überlagerung. Die drei Systeme greifen in dersel
 Das ist die Aufstiegsfalle. Sie ist kein Mythos, sie ist Mathematik.
 
 <figure class="wide">
-  <img src="/assets/arbeit-muss-sich-lohnen/verfuegbares_einkommen_2025.png" alt="Verfügbares Jahreseinkommen in Abhängigkeit vom Bruttojahreslohn – Single und Alleinerziehende mit einem Kind. Die Kurve verläuft zwischen 0 und 20.000 Euro fast flach.">
+  <img src="/assets/arbeit-muss-sich-lohnen/abb1_verfuegbares_einkommen.png" alt="Verfügbares Jahreseinkommen in Abhängigkeit vom Bruttojahreslohn – Single und Alleinerziehende mit einem Kind. Die Kurve verläuft zwischen 0 und 20.000 Euro fast flach.">
   <figcaption>
     Abbildung 2 · Verfügbares Einkommen einer alleinstehenden Vollzeitbeschäftigten (blau) und einer Alleinerziehenden mit einem Kind (rot) in Abhängigkeit vom Bruttojahreslohn. Eigene Modellrechnung, Stand 2025 (Mindestlohn 12,82 €/h, Anrechnung von Wohngeld, Kinderzuschlag, Bildungs- und Teilhabepaket, Sozialabgaben und Lohnsteuer).
   </figcaption>
@@ -106,7 +106,7 @@ Die Kurve müsste, wenn das System sauber gestaltet wäre, eine ungefähr linear
 Die nächste Abbildung übersetzt das in eine intuitivere Größe: die Lohnverbleibsquote. Sie misst, wie viel Cent von einem zusätzlich verdienten Euro Bruttolohn am Ende beim Beschäftigten ankommen. Bei einer Singlebeschäftigten steigt sie erst ab 35.000 Euro Jahresbrutto auf ein Niveau, das man als spürbaren Lohngewinn empfinden würde. Bei einer Alleinerziehenden ab 40.000 Euro. Darunter liegen mehrere markante Einbrüche.
 
 <figure class="wide">
-  <img src="/assets/arbeit-muss-sich-lohnen/lohnverbleibsquote_2025.png" alt="Lohnverbleibsquote in Prozent vom nächsten verdienten Euro, mit Vergleichslinie zur konstanten Kapitalrendite von 73,6 Prozent.">
+  <img src="/assets/arbeit-muss-sich-lohnen/abb2_lohnverbleibsquote.png" alt="Lohnverbleibsquote in Prozent vom nächsten verdienten Euro, mit Vergleichslinie zur konstanten Kapitalrendite von 73,6 Prozent.">
   <figcaption>
     Abbildung 3 · Marginale Lohnverbleibsquote: Anteil des nächsten verdienten Euros, der nach Steuern, Sozialabgaben und Transferentzug beim Beschäftigten ankommt. Die goldene Vergleichslinie zeigt die konstante Kapitalrendite (73,6 % nach Abgeltungsteuer und Solidaritätszuschlag).
   </figcaption>
@@ -123,7 +123,7 @@ Für Alleinerziehende kommt ein vierter Einbruch hinzu: der gleitende Wegfall de
 Wie sich diese vier Mechanismen in einer konkreten Lohnabrechnung addieren, zeigt eine Modellrechnung für einen häufig vorkommenden Fall: eine alleinerziehende Vollzeitbeschäftigte mit einem Kind, die zum gesetzlichen Mindestlohn arbeitet – also bei rund 26.700 Euro Bruttojahreslohn – und eine tarifliche Erhöhung um 600 Euro brutto im Monat erhält, etwa durch eine abgeschlossene Weiterbildung. Die 600 Euro brutto bedeuten 7.200 Euro Bruttolohn-Zuwachs im Jahr. Wovon kommt was an?
 
 <figure>
-  <img src="/assets/arbeit-muss-sich-lohnen/waterfall_lohnerhoehung.png" alt="Waterfall-Diagramm: 600 Euro Brutto-Tariferhöhung minus 130 Euro Wohngeld minus 95 Euro Kinderzuschlag minus 120 Euro Sozialabgaben minus 75 Euro Lohnsteuer ergibt 180 Euro Netto-Plus pro Monat.">
+  <img src="/assets/arbeit-muss-sich-lohnen/abb3_wasserfall_600euro.png" alt="Waterfall-Diagramm: 600 Euro Brutto-Tariferhöhung minus 130 Euro Wohngeld minus 95 Euro Kinderzuschlag minus 120 Euro Sozialabgaben minus 75 Euro Lohnsteuer ergibt 180 Euro Netto-Plus pro Monat.">
   <figcaption>
     Abbildung 4 · 600 € Brutto-Tariferhöhung führen zu 180 € Netto-Plus pro Monat. Modellrechnung für eine alleinerziehende Vollzeitbeschäftigte mit einem Kind, Mindestlohn 12,82 €/h, mittelgroße ostdeutsche Stadt. Drei Subsysteme (Transferentzug, Sozialversicherung, Einkommensteuer) absorbieren gemeinsam 70 % der nominalen Lohnerhöhung.
   </figcaption>
@@ -144,7 +144,7 @@ Stimmt das? Schauen wir nach.
 Wenn man die Wirkung der Aufstiegsfalle zeigen will, hat man zwei Möglichkeiten. Man kann sich den deutschen Verlauf isoliert anschauen – dann sieht man die Knicke, die das Diagramm im vorherigen Abschnitt zeigt. Oder man stellt den deutschen Verlauf in den OECD-Vergleich, normiert auf Vielfache des nationalen Durchschnittslohns, und schaut, wo Deutschland sich von vergleichbaren Industrieländern unterscheidet. Erst der zweite Schritt zeigt, dass das, was hier passiert, keine Naturtatsache ist, sondern eine Eigenheit.
 
 <figure class="wide">
-  <img src="/assets/arbeit-muss-sich-lohnen/lohnsteuer_oecd_2025.png" alt="OECD-Vergleich der marginalen Grenzbelastung auf Lohneinkommen, normiert auf das Vielfache des nationalen Durchschnittslohns. Deutschland liegt bei einem Durchschnittslohn deutlich über USA, UK, Polen und Niederlande.">
+  <img src="/assets/arbeit-muss-sich-lohnen/abb4_oecd_vergleich.png" alt="OECD-Vergleich der marginalen Grenzbelastung auf Lohneinkommen, normiert auf das Vielfache des nationalen Durchschnittslohns. Deutschland liegt bei einem Durchschnittslohn deutlich über USA, UK, Polen und Niederlande.">
   <figcaption>
     Abbildung 5 · Marginale Grenzbelastung auf Lohneinkommen im OECD-Vergleich, normiert auf das Vielfache des nationalen Durchschnittslohns. Die deutsche Kurve fällt zweimal markant ab – bei 66.150 € (Beitragsbemessungsgrenze KV/PV) und bei 96.600 € (BBG RV/AV). Die Schere zwischen Lohnbelastung und Kapitalertragsbesteuerung (26,375 % flat) beträgt im Median rund 25 Prozentpunkte.
   </figcaption>
@@ -236,4 +236,4 @@ In die Lohnverbleibsquote gehen Regelbedarf, Kosten der Unterkunft, Mehrbedarf f
 
 Die Werte zur Kapitalbesteuerung beziehen sich auf die seit 2009 geltende Abgeltungsteuer ([§ 32d EStG](https://www.gesetze-im-internet.de/estg/__32d.html)) und auf die zehnjährige Spekulationsfrist für Immobilien ([§ 23 EStG](https://www.gesetze-im-internet.de/estg/__23.html)). Die Daten zur Vermögensverteilung und die zitierten Schätzungen zu potenziellen Steuermehreinnahmen entstammen den Modellierungen des DIW ([Bach & Eichfelder, 2021](https://www.diw.de/documents/publikationen/73/diw_01.c.821121.de/21-27-3.pdf)). Wie hoch die tatsächlichen Steuerausfälle durch die geltenden Privilegien sind, hängt methodisch davon ab, wie man Ausweichreaktionen in einer hypothetischen Besteuerung modelliert.
 
-Quellcode der Diagramme: [GitHub – Datenjournalismus](https://github.com/LinyingL/Datenjournalismus).
+Quellcode der Diagramme: [arbeit_charts.py](/assets/arbeit-muss-sich-lohnen/arbeit_charts.py).
