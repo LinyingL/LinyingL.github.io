@@ -18,22 +18,6 @@ Deutschland Steuerparadoxie 2025 (numerische Ableitung)
 Szenario A: Alleinstehend (kinderlos)
 Szenario B: Alleinerziehend + 1 Kind (8 J.)
 
-Korrekturen gegenüber v7 (= Datei "deutschland_steuer_v6.py"):
-  1. KiZ-Bug behoben. v7 rechnete UVG zu 100% gegen den Kinderzuschlag.
-     Da UVG (3.588€) > KiZ-Höchstbetrag (3.564€), war kiz_B() für JEDES
-     Einkommen 0 – der Kinderzuschlag fiel komplett aus dem Modell.
-     v8: UVG wird zu 45% angerechnet (Starke-Familien-Gesetz 2019/20).
-  2. kiz_B() als empirisch kalibrierte Reduktionsform neu implementiert:
-     KiZ = (Höchstbetrag + Sofortzuschlag) − 45% Kindereinkommen(UVG)
-           − 45% Nettolohn über der kalibrierten Bemessungsgrenze.
-     Kalibriert auf reale Stützpunkte (Familienkasse/BMFSFJ 2025):
-       Nettolohn 1.730€/Mo → ~50€/Mo KiZ; Auslauf ~2.500€/Mo brutto
-       (Alleinerziehend + 1 Kind, Warmmiete ~500€).
-  3. Kindersofortzuschlag (25€/Mo.) getrennt ausgewiesen, nicht mehr
-     fälschlich in den Höchstbetrag 297€ hineingerechnet.
-Übernommen aus v7: numerische Ableitung, BuT inkl. Schulessen,
-  AG-Kosten-Modell, verfuegbar_A/B, Günstigerprüfung §31 EStG.
-
 HINWEIS: §6a BKGG ist analytisch nicht exakt reproduzierbar (Erwerbs-
   tätigenfreibeträge, Wohnbedarfsanteile). kiz_B() ist daher eine auf reale
   Stützpunkte kalibrierte Reduktionsform. KIZ_BEMESS ist der zentrale
@@ -485,7 +469,17 @@ def figur_2_lohnverbleibsquote():
     ax.set_facecolor(PANEL); ax.spines[["top","right"]].set_visible(False)
     ax.spines[["left","bottom"]].set_color(LGRAY)
     xlim=(0.,2.5); m=(xf>=xlim[0])&(xf<=xlim[1])
-    xm=xf[m]; ra=roiA[m]; rb=roiB[m]
+    xm=xf[m]; ra=roiA[m]; rb=roiB[m].copy()
+    
+    # Spitze (BuT-Klippe) entfernen und durch Marker ersetzen
+    spike_mask = rb < -15
+    idx_cliff = np.where(spike_mask)[0]
+    if len(idx_cliff) > 0:
+        x_cliff = xm[idx_cliff[0]]
+        rb[spike_mask] = np.nan
+    else:
+        x_cliff = None
+        
     bx=xf[bg_end]; mlx=ML_VZ/AVG_WAGE
 
     at=ax.twiny()
@@ -516,6 +510,14 @@ def figur_2_lohnverbleibsquote():
         ax.text((xf[ds]+xf[de])/2,-15,'0 % Wachstum\nTote Zone',color=C_DEAD,
                 ha="center",fontsize=8.5,fontweight="bold",alpha=.90,zorder=12,
                 bbox=dict(boxstyle="round,pad=0.25",fc=BG_COL,ec=C_DEAD,lw=.6,alpha=.95))
+
+    if x_cliff is not None:
+        ax.plot(x_cliff, 0, marker="v", color=C_DEAD, markersize=8, zorder=13)
+        ax.annotate("BuT-Klippe: −1.075€/Jahr", xy=(x_cliff, -2), xytext=(x_cliff + 0.05, -12),
+                    color=C_DEAD, fontsize=8.5, fontweight="bold", alpha=0.90, zorder=12,
+                    arrowprops=dict(arrowstyle="->", color=C_DEAD, lw=1.2),
+                    bbox=dict(boxstyle="round,pad=0.25", fc=BG_COL, ec=C_DEAD, lw=0.6, alpha=0.95),
+                    va="center", ha="left")
 
     ax.axhline(0,color=LGRAY,lw=.8,alpha=.5)
     ax.set_xlim(*xlim); ax.set_ylim(-25,100)
@@ -1283,7 +1285,7 @@ def figur_4_oecd():
                 fontsize=7.8, va="center", alpha=0.78, clip_on=True)
 
     # ── Deutschland AN-Kurve (Formel) ─────────────────────────────────────────────
-    # Deutschland-Hauptkurve: kräftiges Dunkelrot (Economist-Stil)
+    # Deutschland-Hauptkurve: kräftiges Dunkelrot
     ax.plot(x_fine, de_fine, color="#b2182b", lw=3.0, zorder=8,
             label="Deutschland — Grenzbelastung (Lohn)")
     ax.plot(x_fine, de_avg_fine, color="#b2182b", lw=3.0, linestyle="--", zorder=8,
