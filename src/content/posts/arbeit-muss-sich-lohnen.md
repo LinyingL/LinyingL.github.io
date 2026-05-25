@@ -11,7 +11,7 @@ tags:
   - bürgergeld
   - distributive-justice
 author: "Linying Li"
-draft: false
+draft: true
 ---
 
 ## I. Der Satz, den im Frühjahr 2026 alle wiederholen
