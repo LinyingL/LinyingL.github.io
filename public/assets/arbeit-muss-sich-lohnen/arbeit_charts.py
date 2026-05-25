@@ -1421,7 +1421,7 @@ def figur_4_oecd():
 
     # ── Titel & Quellenzeile ──────────────────────────────────────────────────────
     fig.suptitle(
-        "Marginale Lohnsteuerbelastung im OECD-Vergleich (2025)",
+        "Marginale Lohnsteuerbelastung im OECD-Vergleich (Stand: 2025)",
         fontsize=14, fontweight="bold", color="#1a1a1a", y=0.995, 
     )
 
