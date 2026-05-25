@@ -28,8 +28,7 @@ Die Differenz zwischen dem politischen Bild und der ökonomischen Realität ist 
 
 Die Reform der Regierung Merz adressiert keine dieser drei Schichten. Sie verschärft die Sanktion gegen die rund 0,5 Prozent der Bezieher, die als Arbeitsverweigerer identifiziert sind, und lässt die Konstruktion stehen, die für die übrigen 99,5 Prozent – und für die Millionen knapp oberhalb der Grenze – die eigentliche Kostenstelle ist.
 
-Was im Kanzleramt als Lohnabstandsgebot formuliert wird, ist auf der Lohnabrechnung einer Kassiererin im Mindestlohn als Lohnabstand von 3,80 Euro pro Stunde sichtbar. Was als Verteidigung der „arbeitenden Mitte“ deklariert wird, fällt mathematisch ausgerechnet die Mitt
-#am härtesten. Diese Diskrepanz hat eine Geschichte, sie hat Mechanismen, und sie hat – das ist die unangenehmste Pointe – keinen Konstruktionsfehler. Sie funktioniert genau so, wie sie konstruiert wurde.
+Was im Kanzleramt als Lohnabstandsgebot formuliert wird, ist auf der Lohnabrechnung einer Kassiererin im Mindestlohn als Lohnabstand von 3,80 Euro pro Stunde sichtbar. Was als Verteidigung der „arbeitenden Mitte“ deklariert wird, fällt mathematisch ausgerechnet die Mitte am härtesten. Diese Diskrepanz hat eine Geschichte, sie hat Mechanismen, und sie hat – das ist die unangenehmste Pointe – keinen Konstruktionsfehler. Sie funktioniert genau so, wie sie konstruiert wurde.
 
 Die meisten politischen Beobachter erklären die Probleme des deutschen Sozialstaats mit verweigerter Arbeit. Wenn man die Zahlen ernst nimmt, zeigt sich ein anderes Bild. Bevor wir es betrachten können, lohnt sich ein Blick auf die populäre Erklärung – und darauf, warum sie sich so hartnäckig hält.
 
