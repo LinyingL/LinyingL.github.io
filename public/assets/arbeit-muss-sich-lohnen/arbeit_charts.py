@@ -2,9 +2,9 @@
 Arbeit muss sich lohnen - Abbildungen 1-4 (Stand: 2025)
 =====================================================================
 Erzeugt die vier getrennten Grafiken des Artikels:
-  figur_1_einkommen()          Abb. 1  Verfuegbares Einkommen
+  figur_1_einkommen()          Abb. 1  Verfügbares Einkommen
   figur_2_lohnverbleibsquote() Abb. 2  Lohnverbleibsquote
-  figur_3_wasserfall()         Abb. 3  Was von 600 EUR Tariferhoehung bleibt
+  figur_3_wasserfall()         Abb. 3  Was von 600 EUR Tariferhöhung bleibt
   figur_4_oecd()               Abb. 4 Marginale Lohnsteuer OECD-Vergleich
 
 Jede Abbildung wird als PNG (DPI dpi) und als Vektor-PDF gespeichert.
@@ -231,9 +231,9 @@ def bg_B(b):
 def kiz_B(b):
     """Kinderzuschlag §6a BKGG - empirisch kalibrierte Reduktionsform.
 
-    KiZ = (Hoechstbetrag + Sofortzuschlag)
+    KiZ = (Höchstbetrag + Sofortzuschlag)
           - 45% Kindereinkommen (UVG)
-          - 45% Nettolohn ueber der kalibrierten Bemessungsgrenze KIZ_BEMESS.
+          - 45% Nettolohn über der kalibrierten Bemessungsgrenze KIZ_BEMESS.
     Kalibriert auf: Nettolohn 1.730 EUR/Mo -> ~50 EUR/Mo KiZ;
     Auslauf bei ~2.500 EUR/Mo brutto (Alleinerziehend + 1 Kind).
     """
@@ -241,7 +241,7 @@ def kiz_B(b):
     if b<KIZ_MEG: return 0.        # unter Mindesteinkommensgrenze 600 EUR/Mo. brutto
     n=netto_fn(b, FAM_ENTL, kinderlos=False)
     bemess=KIZ_BEMESS                                  # kalibrierte Bemessungsgrenze
-    abzug_eltern=KIZ_ELT_ANR*max(0.,n-bemess)          # 45% elterl. Einkommen ueber Grenze
+    abzug_eltern=KIZ_ELT_ANR*max(0.,n-bemess)          # 45% elterl. Einkommen über Grenze
     abzug_kind=KIZ_KIND_ANR*UVG                        # 45% Kindereinkommen (UVG)
     kiz=max(0.,KIZ_HOECHST+KIZ_SOFORT-abzug_kind-abzug_eltern)
     return kiz
@@ -1287,9 +1287,9 @@ def figur_4_oecd():
 
     # ── Deutschland AN-Kurve (Formel) ─────────────────────────────────────────────
     # Deutschland-Hauptkurve: kräftiges Dunkelrot
-    ax.plot(x_fine, de_fine, color="#b2182b", lw=3.0, zorder=8,
+    ax.plot(x_fine, de_fine, color="#b2182b", lw=3.0, linestyle="--", zorder=8,
             label="Deutschland — Grenzbelastung (Lohn)")
-    ax.plot(x_fine, de_avg_fine, color="#b2182b", lw=3.0, linestyle="--", zorder=8,
+    ax.plot(x_fine, de_avg_fine, color="#b2182b", lw=3.0, zorder=8,
             label="Deutschland — Durchschnittsbelastung (Lohn)")
 
     # ── BBG-Sprünge in DE annotieren ──────────────────────────────────────────────
@@ -1367,7 +1367,7 @@ def figur_4_oecd():
     ax.set_xlim(*xlim)
     ax.set_ylim(*ylim)
     ax.set_xlabel("Vielfaches des nationalen Durchschnittslohns (APW-Multiple)  "
-                  f"— DE: 1,0x = {AVG_WAGE/1e3:.1f} € p.a. (Quelle: OECD)",
+                  f"— DE: 1,0x = {AVG_WAGE/1e3:.1f} k€ p.a. (Quelle: OECD)",
                   fontsize=10, labelpad=10, color=SUBTEXT)
     ax.set_ylabel("Marginale Grenzbelastung [%]\n(Einkommensteuer + AN-Sozialabgaben)",
                   fontsize=10, labelpad=10, color=SUBTEXT)
@@ -1382,22 +1382,22 @@ def figur_4_oecd():
     ax.text(5.07, de_end,
             "DE Grenz.",
             color="#b2182b", fontsize=9, fontweight="bold", va="center",
-            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#b2182b", alpha=0.85))
+            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#b2182b", alpha=0.85, linestyle="--"))
 
     de_avg_end = de_average_an(5.0)
     ax.text(5.07, de_avg_end,
             "DE Durchschn.",
             color="#b2182b", fontsize=9, fontweight="bold", va="center",
-            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#b2182b", alpha=0.85, linestyle="--"))
+            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#b2182b", alpha=0.85))
 
     # ── Legende ───────────────────────────────────────────────────────────────────
     from matplotlib.lines import Line2D
     from matplotlib.patches import Patch
 
     leg_handles = [
-        Line2D([0],[0], color="#b2182b", lw=2.8,
-               label="Deutschland — Grenzbelastung (Marginal: ESt + AN-SV)"),
         Line2D([0],[0], color="#b2182b", lw=2.8, linestyle="--",
+               label="Deutschland — Grenzbelastung (Marginal: ESt + AN-SV)"),
+        Line2D([0],[0], color="#b2182b", lw=2.8,
                label="Deutschland — Durchschnittsbelastung (Effektiv: ESt + AN-SV)"),
         Line2D([0],[0], color="#2166ac", lw=1.8, linestyle=(0,(5,3)),
                label=f"Deutschland — Kapitalertrag ({KAP_SATZ:.2f}% flat)"),
@@ -1451,9 +1451,1399 @@ def figur_4_oecd():
 
 
 
+def _compute_2026():
+    """Einzige Quelle der Wahrheit für das 2026-Modell (Konstanten, Kernfunktionen,
+    Berechnung); genutzt von figur_1b_einkommen() und figur_1b_vergleich().
+    Unveränderte Werte (Bürgergeld-Nullrunde, KiZ-Höchstbetrag/Sofortzuschlag/UVG,
+    Midijob-Grenze, Wohngeld, KIZ_BEMESS) stammen aus den Modul-Globals und wurden
+    für 2026 als unverändert verifiziert.
+    """
+    # ── KONSTANTEN 2026 (nur die ggü. 2025 geänderten) ──
+    AVG_WAGE_26=51_944            # Vorl. Durchschnittsentgelt RV 2026 (SVBezGrV 2026 §3 Abs.2) https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html
+    GFB_26=12_348                 # Grundfreibetrag 2026 alleinstehend https://www.gesetze-im-internet.de/estg/__32a.html
+    ZONE2_26=17_799              # §32a EStG 2026: Ende 1. Progressionszone
+    ZONE3_26=69_879             # §32a EStG 2026: Beginn 42 %-Proportionalzone
+    REICH_26=277_826             # Reichensteuer-Eckwert unverändert
+    SOLI_FG_26=20_350            # Soli-Freigrenze 2026 (festgesetzte ESt, Einzelvlg.)
+    KV_S_26=0.175               # 14,6 % allg. + 2,9 % durchschn. Zusatzbeitrag (2026)
+    BBG_KV_26=69_750            # BBG KV/PV 2026
+    BBG_RV_26=101_400           # BBG RV/AV 2026
+    MINIJOB_26=603*12           # Minijob-Grenze 2026 (an Mindestlohn 13,90 EUR gekoppelt)
+    MIDIJOB_26=2_000*12         # Midijob-Obergrenze 2026 (unverändert ggü. 2025, DRV)
+    KINDERGELD_26=259*12         # Kindergeld 2026 (259 EUR/Mo.)
+    KFB_KIND_26=6_828            # Kinderfreibetrag (sächl. Existenzmin.) 2026, voll
+    KFB_26=KFB_KIND_26+KFB_BEA   # + BEA-Freibetrag (2.928, unverändert) = 9.756
+    ML_H_26=13.90; ML_VZ_26=ML_H_26*2_080  # Mindestlohn 2026, Vollzeit
+
+    def est_26(z):
+        z=max(0.,z)
+        if z<=GFB_26: return 0.
+        if z<=ZONE2_26: y=(z-GFB_26)/1e4; return (914.51*y+1400)*y
+        if z<=ZONE3_26: w=(z-ZONE2_26)/1e4; return (173.10*w+2397)*w+1034.87
+        if z<=REICH_26: return .42*z-11135.63
+        return .45*z-19470.38
+    def soli_26(z):
+        e=est_26(z)
+        if e<=SOLI_FG_26: return 0.
+        return min(.119*(e-SOLI_FG_26),.055*e)
+    def sv_an_26(b, kinderlos=True, minijob=MINIJOB_26, midijob=MIDIJOB_26):
+        pv_zu=PV_KL_ZU if kinderlos else 0.
+        return (min(b,BBG_KV_26)*((KV_S_26+PV_S)/2+pv_zu)
+               +min(b,BBG_RV_26)*(RV_S+AV_S)/2)*mj_f(b, minijob, midijob)
+    def netto_26(b, entl=0, kinderlos=True, minijob=MINIJOB_26, midijob=MIDIJOB_26):
+        sv=sv_an_26(b, kinderlos, minijob, midijob); zvE=max(0.,b-sv-1230-entl)   # 1230 = AN-Pauschbetrag (unverändert)
+        return b-sv-est_26(zvE)-soli_26(zvE)
+    # Szenario A: Single (kinderlos)
+    def bg_A_26(b):
+        n=netto_26(b, kinderlos=True)
+        return max(0.,BG_BED_S-max(0.,n-bg_fb(b,BG_G3S)))
+    def nb_A_26(b): return BG_NB_S if bg_A_26(b)>0 else 0.
+    def wg_A_26(b):
+        if bg_A_26(b)>0: return 0.
+        n=netto_26(b, kinderlos=True)
+        if n>=WG_OG1: return 0.
+        return WG_MAX1*max(0.,min(1.,(WG_OG1-n)/(WG_OG1-WG_UG1)))
+    # Szenario B: Alleinerziehend + 1 Kind (8 J.)
+    def bg_B_26(b):
+        n=netto_26(b, FAM_ENTL, kinderlos=False); fb=bg_fb(b,BG_G3F)
+        return max(0.,BG_BED_F-max(0.,n-fb)-KINDERGELD_26-UVG)
+    def kiz_B_26(b):
+        if bg_B_26(b)>0: return 0.
+        if b<KIZ_MEG: return 0.
+        n=netto_26(b, FAM_ENTL, kinderlos=False)
+        abzug_eltern=KIZ_ELT_ANR*max(0.,n-KIZ_BEMESS)
+        abzug_kind=KIZ_KIND_ANR*UVG
+        return max(0.,KIZ_HOECHST+KIZ_SOFORT-abzug_kind-abzug_eltern)
+    def nb_B_26(b): return BG_NB_F if bg_B_26(b)>0 else 0.
+    def wg_B_26(b):
+        if bg_B_26(b)>0: return 0.
+        erwerb=max(0., b-1230)
+        Y=max(0., 0.70*erwerb + UVG - WG_AE_FREIBETRAG)/12.
+        cap=WG_HOECHST_2P[WG_MIETENSTUFE]+WG_KLIMA_2P
+        M=min(WG_MIETE_B/12., cap)+WG_HEIZ_2P
+        wg=WG_FAKTOR*(M-(WG_A2+WG_B2*M+WG_C2*Y)*Y)
+        return max(0., min(M, wg))*12.
+    def but_B_26(b):
+        if bg_B_26(b)>0 or kiz_B_26(b)>0 or wg_B_26(b)>0: return BUT
+        return 0.
+    def gsp_B_26(b, minijob=MINIJOB_26, midijob=MIDIJOB_26):
+        sv=sv_an_26(b, kinderlos=False, minijob=minijob, midijob=midijob)
+        zvE=max(0., b-sv-1230-FAM_ENTL)
+        zvE_kfb=max(0., zvE-KFB_26)
+        ersparnis=(est_26(zvE)+soli_26(zvE))-(est_26(zvE_kfb)+soli_26(zvE_kfb))
+        return max(0., ersparnis-KINDERGELD_26)
+    def ag_kosten_26(b):
+        if b<=MINIJOB_26: return b*1.31
+        ag=min(b,BBG_KV_26)*(KV_S_26+PV_S)/2+min(b,BBG_RV_26)*(RV_S+AV_S)/2
+        return b+ag
+    def verfuegbar_A_26(b):
+        n=netto_26(b, kinderlos=True)
+        return n+bg_A_26(b)+nb_A_26(b)+wg_A_26(b)
+    def verfuegbar_B_26(b):
+        n=netto_26(b, FAM_ENTL, kinderlos=False)
+        return n+bg_B_26(b)+nb_B_26(b)+wg_B_26(b)+KINDERGELD_26+kiz_B_26(b)+UVG+but_B_26(b)+gsp_B_26(b)
+
+    # ── BERECHNUNG 2026 (Raster brutto/N/EPS aus dem Modulkontext) ──
+    xf26=brutto/AVG_WAGE_26
+    nvA26=np.zeros(N); ntA26=np.zeros(N); nvB26=np.zeros(N); roiA26=np.zeros(N); roiB26=np.zeros(N)
+    for i,b in enumerate(brutto):
+        nvA26[i]=verfuegbar_A_26(b)
+        nvB26[i]=verfuegbar_B_26(b)
+        ntA26[i]=netto_26(b, kinderlos=True)
+        dag=(ag_kosten_26(b+EPS)-ag_kosten_26(b))/EPS
+        dA=(verfuegbar_A_26(b+EPS)-nvA26[i])/EPS
+        dB=(verfuegbar_B_26(b+EPS)-nvB26[i])/EPS
+        roiA26[i]=np.clip(dA/dag*100,-20,100)
+        roiB26[i]=np.clip(dB/dag*100,-20,100)
+    BASE_A26=nvA26[0]; BASE_B26=nvB26[0]
+    bga26=np.array([bg_A_26(b) for b in brutto])
+    wga26=np.array([wg_A_26(b) for b in brutto])
+    bg_end26=int(np.where(bga26>0)[0][-1]) if (bga26>0).any() else N//4
+    wg_end26=int(np.where(wga26>0)[0][-1]) if (wga26>0).any() else bg_end26+100
+    dead26=np.where((roiA26<=1.)&(bga26>0)&(brutto>BG_G3S))[0]
+    ds26=dead26[0] if len(dead26)>0 else None; de26=dead26[-1] if len(dead26)>0 else None
+
+    return dict(AVG_WAGE=AVG_WAGE_26, ML_VZ=ML_VZ_26, ML_H=ML_H_26,
+                GFB=GFB_26, ZONE3=ZONE3_26, BBG_KV=BBG_KV_26, BBG_RV=BBG_RV_26,
+                xf=xf26, nvA=nvA26, ntA=ntA26, nvB=nvB26, roiA=roiA26, roiB=roiB26,
+                BASE_A=BASE_A26, BASE_B=BASE_B26,
+                bg_end=bg_end26, wg_end=wg_end26, ds=ds26, de=de26)
+
+
+def figur_1b_einkommen():
+    """
+    ABBILDUNG 1b — Verfügbares Einkommen (Stand: 2026)
+
+    Quellen der 2026-Werte:
+      §32a EStG 2026 / Steuerfortentwicklungsgesetz v. 23.12.2024,
+        BMF LStH 2026 (gesetze-im-internet.de/estg/__32a.html)
+      SVBezGrV 2026 (gesetze-im-internet.de/svbezgrv_2026), GKV-Spitzenverband,
+        durchschn. Zusatzbeitrag 2,9 % (BMG/Bundesanzeiger 11/2025)
+      RBSFV 2026 (BGBl. 2025 I Nr. 243): Bürgergeld-Nullrunde (Besitzschutz
+        §28a Abs.5 SGB XII) -> Regelsätze unverändert
+      Kindergeld 259 EUR (BA-PM 2025-53), KFB 6.828 EUR (§32 Abs.6 EStG)
+      Mindestlohn 13,90 EUR (BMAS), Minijob-Grenze 603 EUR (DRV)
+      Wohngeld 2026 unverändert (nächste Dynamisierung 2027)
+    """
+    # rcParams von figur_4_oecd() ggf. überschrieben -> Basis-Stil von Abb.1 wieder setzen
+    plt.rcParams.update({"font.family":"serif",
+        "font.serif":["Georgia","Palatino","Times New Roman","DejaVu Serif"],
+        "mathtext.fontset":"dejavuserif",
+        "figure.facecolor":BG_COL,
+        "axes.facecolor":PANEL,"text.color":WHITE,"axes.labelcolor":DIMW,
+        "xtick.color":DIMW,"ytick.color":DIMW,
+        "axes.linewidth":0.6})
+
+    R=_compute_2026()
+    AVG_WAGE_26=R['AVG_WAGE']; ML_VZ_26=R['ML_VZ']; ML_H_26=R['ML_H']
+    GFB_26=R['GFB']; ZONE3_26=R['ZONE3']; BBG_KV_26=R['BBG_KV']; BBG_RV_26=R['BBG_RV']
+    xf26=R['xf']; nvA26=R['nvA']; ntA26=R['ntA']; nvB26=R['nvB']
+    BASE_A26=R['BASE_A']; BASE_B26=R['BASE_B']
+    bg_end26=R['bg_end']; wg_end26=R['wg_end']; ds26=R['ds']; de26=R['de']
+
+    # ═══════════ ABBILDUNG 1b – Verfügbares Einkommen ═══════════
+    fig,ax1=plt.subplots(figsize=(18,10),facecolor=BG_COL)
+    ax1.set_facecolor(PANEL); ax1.spines[["top","right"]].set_visible(False)
+    ax1.spines[["left","bottom"]].set_color(LGRAY)
+
+    xlim=(0.,2.5); m=(xf26>=xlim[0])&(xf26<=xlim[1])
+    xm=xf26[m]; nva=nvA26[m]; nta=ntA26[m]; nvb=nvB26[m]
+    nmax=max(nva.max(),nvb.max())
+    bx=xf26[bg_end26]; wx=xf26[wg_end26]; mlx=ML_VZ_26/AVG_WAGE_26
+
+    at=ax1.twiny()
+    at.set_xlim(xlim[0]*AVG_WAGE_26/1e3,xlim[1]*AVG_WAGE_26/1e3)
+    at.set_xlabel("Brutto-Jahreseinkommen [k€]",color=DIMW,fontsize=10,labelpad=8)
+    at.tick_params(colors=DIMW,labelsize=8.5)
+    at.spines[["top","right","left","bottom"]].set_color(LGRAY)
+    at.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"{v:.0f}k"))
+
+    pol=[(GFB_26/AVG_WAGE_26,f"GFB\n{GFB_26//1000}k€",DIMW),
+         (ZONE3_26/AVG_WAGE_26,f"Spitzen-\nsteuer\n{ZONE3_26//1000}k€",C_YELLOW),
+         (BBG_KV_26/AVG_WAGE_26,f"BBG KV\n{BBG_KV_26//1000}k€","#2e86ab"),
+         (BBG_RV_26/AVG_WAGE_26,f"BBG RV\n{BBG_RV_26//1000}k€",C_NETTO)]
+    def dpol(ax,lbl=True):
+        yfs=[.05,.72,.46,.05]
+        for (xt,l,c),yf in zip(pol,yfs):
+            if xlim[0]<xt<=xlim[1]:
+                ax.axvline(xt,color=c,lw=.8,ls=":",alpha=.55,zorder=1)
+                if lbl:
+                    yl=ax.get_ylim()
+                    ax.text(xt+.015,yl[0]+(yl[1]-yl[0])*yf,l,color=c,fontsize=7,alpha=.9,
+                            va="bottom",ha="left",zorder=12,
+                            bbox=dict(boxstyle="round,pad=0.15",fc=BG_COL,alpha=.88,ec="none"))
+
+    ax1.axvspan(0,bx,color=C_BG_ZONE,alpha=.30,zorder=0)
+    ax1.axvspan(bx,wx,color=C_NL_ZONE,alpha=.18,zorder=0)
+    if ds26 is not None:
+        ax1.axvspan(xf26[ds26],xf26[de26],color=C_DEAD,alpha=.10,zorder=1)
+
+    for base,col,lbl,yoff in [(BASE_A26,C_BASE,f"Single: {BASE_A26/12:.0f}€/Mo.",-nmax*.035),
+                               (BASE_B26,C_FAM,f"Familie: {BASE_B26/12:.0f}€/Mo.",+nmax*.018)]:
+        ax1.axhline(base,color=col,lw=1.2,ls="--",alpha=.60,zorder=4)
+        ax1.text(xlim[1]-.02,base+yoff,
+                 f"BG-Grundniveau {lbl}",color=col,ha="right",fontsize=7.5,zorder=12,
+                 bbox=dict(boxstyle="round,pad=0.15",fc=BG_COL,ec=col,lw=.6,alpha=.92))
+
+    ax1.axvline(mlx,color=C_YELLOW,lw=1.4,ls="-.",alpha=.55,zorder=2)
+    ax1.plot(xm,nta,color=C_OHNE_TR,lw=1.2,ls="--",alpha=.55,zorder=3)
+    ax1.plot(xm,nva,color=C_NETTO,lw=2.4,zorder=5)
+    ax1.plot(xm,nvb,color=C_FAM,lw=2.4,zorder=5)
+
+    if ds26 is not None:
+        ax1.text((xf26[ds26]+xf26[de26])/2,nmax*.50,'Tote Zone\n0% Wachstum',
+                 color=C_DEAD,ha="center",fontsize=9,fontweight="bold",alpha=.90,zorder=12,
+                 bbox=dict(boxstyle="round,pad=0.3",fc=BG_COL,ec=C_DEAD,lw=.6,alpha=.95))
+
+    mli=np.argmin(np.abs(brutto-ML_VZ_26))
+    eA=max(0,(nvA26[mli]-BASE_A26)/2080); eB=max(0,(nvB26[mli]-BASE_B26)/2080)
+    ax1.annotate(
+        f"Mindestlohn Vollzeit ({ML_VZ_26/1e3:.0f}k€):\n"
+        f"  Single: eff. {eA:.1f}€/h  ({eA/ML_H_26*100:.0f}% d. ML)\n"
+        f"  Familie: eff. {eB:.1f}€/h  ({eB/ML_H_26*100:.0f}% d. ML)",
+        xy=(mlx,nvA26[mli]),xytext=(mlx+.25,nmax*.33),fontsize=8.5,color=C_YELLOW,zorder=12,
+        arrowprops=dict(arrowstyle="->",color=C_YELLOW,lw=1.2,connectionstyle="arc3,rad=-.15"),
+        bbox=dict(boxstyle="round,pad=0.35",fc=BG_COL,ec=C_YELLOW,lw=.6,alpha=.95))
+
+    ax1.text(.02,nmax*.82,"Aufstiegsfalle\n80–100 %\ndes Lohnzuwachses\nverdunsten",
+        fontsize=8.5,color="#8b5e3c",zorder=12,
+        bbox=dict(boxstyle="round,pad=0.25",fc=BG_COL,ec="#8b5e3c",lw=.6,alpha=.95))
+
+    dpol(ax1)
+    ax1.set_xlim(*xlim); ax1.set_ylim(0,nmax*1.18)
+    ax1.set_ylabel("Verfügbares Einkommen [€/Jahr]",color=DIMW,fontsize=11,labelpad=12)
+    ax1.tick_params(axis="y",colors=DIMW,labelsize=9)
+    ax1.tick_params(axis="x",colors=DIMW,labelsize=9)
+    ax1.set_xlabel(f"Einkommen (Vielfaches Durchschnittslohn · 1,0x = {AVG_WAGE_26/1e3:.1f}k€)",
+                   color=DIMW,fontsize=10.5,labelpad=10)
+    ax1.xaxis.set_major_formatter(mticker.FormatStrFormatter('%.1fx'))
+    ax1.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"{v/1e3:.0f}k€"))
+    ax1.grid(False)
+
+    leg1=[Line2D([0],[0],color=C_NETTO,lw=2.4,label="Single"),
+          Line2D([0],[0],color=C_FAM,lw=2.4,label="Alleinerziehend +1 Kind"),
+          Line2D([0],[0],color=C_OHNE_TR,lw=1.2,ls="--",alpha=.6,label="Netto (nur ESt+SV, ohne Transfers)"),
+          Line2D([0],[0],color=C_BASE,lw=1.2,ls="--",alpha=.6,label="BG-Grundniveau (0€ Arbeit)"),
+          Patch(facecolor=C_DEAD,alpha=.12,label="Tote Zone (0 % Ertrag)")]
+    ax1.legend(handles=leg1,loc="upper left",facecolor=PANEL2,edgecolor=LGRAY,
+               fontsize=8.5,framealpha=.95)
+    ax1.set_title("Verfügbares Einkommen — Aufstiegsfalle im unteren Lohnbereich (Stand: 2026)",
+        fontsize=15,fontweight="bold",pad=30,color=WHITE)
+    ax1.annotate("© Linying Li", xy=(1.0,-0.085), xycoords='axes fraction',
+                 ha='right', va='top', fontsize=12, color=DIMW, alpha=0.65,
+                 fontstyle='italic', annotation_clip=False)
+
+    out1b="/Users/lilinying/Downloads/abb1b_verfuegbares_einkommen_2026.png"
+    plt.savefig(out1b,dpi=DPI,facecolor=BG_COL,bbox_inches='tight')
+    plt.savefig(out1b.replace('.png','.pdf'),facecolor=BG_COL,bbox_inches='tight')
+    plt.close(fig)
+    print(f"Gespeichert: {out1b}")
+
+
+
+def figur_1b_vergleich():
+    """
+    ABBILDUNG 1c — Direktvergleich Verfügbares Einkommen 2025 vs. 2026.
+
+    Oben : beide Jahre überlagert (2025 gestrichelt/blass, 2026 durchgezogen).
+    Unten: Differenz 2026 − 2025 in €/Jahr je Szenario.
+
+    X-Achse = ABSOLUTES Brutto-Jahreseinkommen [k€]. Bewusst nicht der
+    "Vielfache-Durchschnittslohn"-Maßstab, weil 1,0x 2025 (50.257€) und 2026
+    (51.944€) unterschiedlich liegt und den Jahresvergleich verzerren würde.
+
+    Datenquellen: 2025 = Modul-Arrays nvA/nvB; 2026 = _compute_2026().
+    """
+    # Basis-Stil (rcParams) wie Abb.1 sicherstellen 
+    plt.rcParams.update({"font.family":"serif",
+        "font.serif":["Georgia","Palatino","Times New Roman","DejaVu Serif"],
+        "mathtext.fontset":"dejavuserif","figure.facecolor":BG_COL,
+        "axes.facecolor":PANEL,"text.color":WHITE,"axes.labelcolor":DIMW,
+        "xtick.color":DIMW,"ytick.color":DIMW,"axes.linewidth":0.6})
+
+    R=_compute_2026()
+    nvA26=R['nvA']; nvB26=R['nvB']; ML_VZ_26=R['ML_VZ']
+
+    XMAX=90_000.
+    mm=brutto<=XMAX
+    x=brutto[mm]/1e3
+    a25=nvA[mm]; b25=nvB[mm]; a26=nvA26[mm]; b26=nvB26[mm]
+    dA=a26-a25; dB=b26-b25
+    ymax=max(a26.max(),b26.max())
+
+    fig,(ax,ax2)=plt.subplots(2,1,figsize=(18,11),facecolor=BG_COL,
+        gridspec_kw=dict(height_ratios=[3,1.05],hspace=0.12),sharex=True)
+
+    # ── Oberes Panel: Niveau-Vergleich ──
+    ax.set_facecolor(PANEL); ax.spines[["top","right"]].set_visible(False)
+    ax.spines[["left","bottom"]].set_color(LGRAY)
+    ax.plot(x,a25,color=C_NETTO,lw=1.6,ls=(0,(5,2)),alpha=.55,zorder=4)
+    ax.plot(x,a26,color=C_NETTO,lw=2.6,zorder=6)
+    ax.plot(x,b25,color=C_FAM,lw=1.6,ls=(0,(5,2)),alpha=.55,zorder=4)
+    ax.plot(x,b26,color=C_FAM,lw=2.6,zorder=6)
+
+    for mlv,al in [(ML_VZ,.30),(ML_VZ_26,.55)]:
+        ax.axvline(mlv/1e3,color=C_YELLOW,lw=1.2,ls="-.",alpha=al,zorder=2)
+    ax.text(ML_VZ_26/1e3+0.6, ymax*.20,
+            f"Mindestlohn Vollzeit\n2025: {ML_VZ/1e3:.1f}k€ (12,82€/h)\n2026: {ML_VZ_26/1e3:.1f}k€ (13,90€/h)",
+            color=C_YELLOW,fontsize=8,zorder=12,
+            bbox=dict(boxstyle="round,pad=0.3",fc=BG_COL,ec=C_YELLOW,lw=.6,alpha=.95))
+
+    ax.set_ylabel("Verfügbares Einkommen [€/Jahr]",color=DIMW,fontsize=11,labelpad=12)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"{v/1e3:.0f}k€"))
+    ax.tick_params(axis="y",colors=DIMW,labelsize=9); ax.tick_params(labelbottom=False)
+    ax.grid(False); ax.set_xlim(0,XMAX/1e3); ax.set_ylim(0,ymax*1.10)
+
+    leg=[Line2D([0],[0],color=C_NETTO,lw=2.6,label="Single 2026"),
+         Line2D([0],[0],color=C_NETTO,lw=1.6,ls=(0,(5,2)),alpha=.6,label="Single 2025"),
+         Line2D([0],[0],color=C_FAM,lw=2.6,label="Alleinerz. +1 Kind 2026"),
+         Line2D([0],[0],color=C_FAM,lw=1.6,ls=(0,(5,2)),alpha=.6,label="Alleinerz. +1 Kind 2025")]
+    ax.legend(handles=leg,loc="upper left",facecolor=PANEL2,edgecolor=LGRAY,fontsize=8.5,framealpha=.95)
+    ax.set_title("Verfügbares Einkommen — Vergleich 2025 vs. 2026",
+        fontsize=15,fontweight="bold",pad=18,color=WHITE)
+
+    # ── Unteres Panel: Differenz 2026 − 2025 ──
+    ax2.set_facecolor(PANEL); ax2.spines[["top","right"]].set_visible(False)
+    ax2.spines[["left","bottom"]].set_color(LGRAY)
+    ax2.axhline(0,color=LGRAY,lw=.8,alpha=.7,zorder=1)
+    ax2.fill_between(x,0,dA,color=C_NETTO,alpha=.10,zorder=2)
+    ax2.fill_between(x,0,dB,color=C_FAM,alpha=.10,zorder=2)
+    ax2.plot(x,dA,color=C_NETTO,lw=2.0,zorder=5)
+    ax2.plot(x,dB,color=C_FAM,lw=2.0,zorder=5)
+    # Achse robust begrenzen: an verschobenen Transfer-Abbruchkanten (KiZ/Wohngeld/BG)
+    # entstehen schmale Cliff-Spitzen, die die Skala sprengen -> auf 1./99. Perzentil begrenzen.
+    _d=np.concatenate([dA,dB]); _lo=float(np.percentile(_d,1)); _hi=float(np.percentile(_d,99))
+    _pad=max(40.,(_hi-_lo)*0.25); ax2.set_ylim(_lo-_pad,_hi+_pad)
+    ax2.set_ylabel("Δ 2026−2025\n[€/Jahr]",color=DIMW,fontsize=9.5,labelpad=8)
+    ax2.set_xlabel("Brutto-Jahreseinkommen [k€]",color=DIMW,fontsize=10.5,labelpad=8)
+    ax2.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"{v:+.0f}"))
+    ax2.tick_params(colors=DIMW,labelsize=9)
+    ax2.grid(axis="y",color=GRAY,alpha=.4,lw=.6); ax2.set_axisbelow(True)
+    leg2=[Line2D([0],[0],color=C_NETTO,lw=2.0,label="Δ Single"),
+          Line2D([0],[0],color=C_FAM,lw=2.0,label="Δ Alleinerz. +1 Kind")]
+    ax2.legend(handles=leg2,loc="upper right",facecolor=PANEL2,edgecolor=LGRAY,fontsize=8,framealpha=.95)
+    ax2.annotate("© Linying Li",xy=(1.0,-0.42),xycoords='axes fraction',ha='right',va='top',
+                 fontsize=11,color=DIMW,alpha=0.65,fontstyle='italic',annotation_clip=False)
+
+    out1c="/Users/lilinying/Downloads/abb1c_vergleich_2025_2026.png"
+    plt.savefig(out1c,dpi=DPI,facecolor=BG_COL,bbox_inches='tight')
+    plt.savefig(out1c.replace('.png','.pdf'),facecolor=BG_COL,bbox_inches='tight')
+    plt.close(fig)
+    print(f"Gespeichert: {out1c}")
+
+
+
+def figur_3b_wasserfall():
+
+    # ═══════════ ABBILDUNG 3b – Wasserfall 2026: Was von 600 € übrig bleibt ═══════════
+    # Werte = Modellrechnung 2026 aus _compute_2026()-Logik, Szenario Alleinerziehend + 1 Kind,
+    # Vollzeit-Mindestlohn 13,90 €/h: Brutto 28.912 € -> 36.112 €/Jahr (+600 €/Monat).
+    W_BRUTTO=600; W_WG=-107; W_KIZ=-8; W_BUT=-90; W_SV=-127; W_LST=-117
+    W_NETTO=W_BRUTTO+W_WG+W_KIZ+W_BUT+W_SV+W_LST   # = 151
+
+    # rcParams von figur_4_oecd() ggf. überschrieben -> Basis-Stil wieder setzen
+    plt.rcParams.update({"font.family":"serif",
+        "font.serif":["Georgia","Palatino","Times New Roman","DejaVu Serif"],
+        "mathtext.fontset":"dejavuserif","figure.facecolor":BG_COL,
+        "axes.facecolor":PANEL,"text.color":WHITE,"axes.labelcolor":DIMW,
+        "xtick.color":DIMW,"ytick.color":DIMW,"axes.linewidth":0.6})
+
+    fig,ax=plt.subplots(figsize=(18,9.5),facecolor=BG_COL)
+    ax.set_facecolor(PANEL); ax.spines[["top","right"]].set_visible(False)
+    ax.spines[["left","bottom"]].set_color(LGRAY)
+
+    labels=["Brutto-\nErhöhung","Wohngeld\n(Anrechnung)","Kinderzuschlag\n(Wegfall)",
+            "BuT\n(Wegfall)","Sozial-\nabgaben","Lohn-\nsteuer","Netto-\nPlus"]
+    steps=[W_BRUTTO,W_WG,W_KIZ,W_BUT,W_SV,W_LST,None]
+    barcol=[C_NETTO,C_KAP,C_KAP,C_KAP,C_ORANGE,C_FAM2,"#1e7e44"]
+    GREEN="#1e7e44"
+
+    cum=0; bottoms=[]; heights=[]
+    for i,v in enumerate(steps):
+        if i==0:
+            bottoms.append(0); heights.append(W_BRUTTO); cum=W_BRUTTO
+        elif v is None:
+            bottoms.append(0); heights.append(cum)            # Netto-Plus
+        else:
+            bottoms.append(cum+v); heights.append(-v); cum=cum+v
+    tops=[W_BRUTTO]
+    c=W_BRUTTO
+    for v in steps[1:-1]:
+        c+=v; tops.append(c)
+
+    for i in range(7):
+        ax.bar(i,heights[i],bottom=bottoms[i],width=0.62,color=barcol[i],zorder=3)
+    # Verbindungslinien
+    for i in range(6):
+        ax.plot([i+0.31,i+1-0.31],[tops[i],tops[i]],ls=(0,(4,3)),color=LGRAY,lw=1.0,zorder=2)
+
+    disp=["600 €","−107 €","−8 €","−90 €","−127 €","−117 €","151 €"]
+    for i in range(7):
+        if i in (0,6):
+            ax.text(i,heights[i]+22,disp[i],ha="center",va="bottom",fontsize=21,
+                    fontweight="bold",color=(C_NETTO if i==0 else GREEN),zorder=6)
+        elif abs(heights[i])>=30:
+            ax.text(i,bottoms[i]+heights[i]/2,disp[i],ha="center",va="center",fontsize=14,
+                    fontweight="bold",color="white",zorder=6)
+        else:
+            # kleiner Balken (KiZ −8 €): Label unterhalb in Balkenfarbe, da Text nicht hineinpasst
+            ax.text(i,bottoms[i]-14,disp[i],ha="center",va="top",fontsize=12,
+                    fontweight="bold",color=barcol[i],zorder=6)
+
+    ax.axhline(W_BRUTTO,color=C_NETTO,lw=1.0,ls=":",alpha=.6,zorder=1)
+    ax.text(6.45,W_BRUTTO+8,"Brutto-Niveau (600 €)",ha="right",va="bottom",fontsize=9,
+            color=C_NETTO,fontstyle="italic")
+
+    pct=["100 % nominale Erhöhung","−18 %","−1 %","−15 %","−21 %","−20 %","25 % als Netto-Plus"]
+    for i in range(7):
+        ax.text(i,-52,pct[i],ha="center",va="top",fontsize=9.5,
+                color=(C_NETTO if i==0 else (GREEN if i==6 else DIMW)),
+                fontweight=("bold" if i in (0,6) else "normal"))
+    ax.text(2,-92,"Transferentzug",ha="center",fontsize=10.5,color=C_KAP,
+            fontstyle="italic",fontweight="bold")
+    ax.text(4,-92,"Sozialversicherung",ha="center",fontsize=10.5,color=C_ORANGE,
+            fontstyle="italic",fontweight="bold")
+    ax.text(5,-92,"Einkommensteuer",ha="center",fontsize=10.5,color=C_FAM2,
+            fontstyle="italic",fontweight="bold")
+
+    ax.set_xticks(range(7)); ax.set_xticklabels(labels,fontsize=10,color=WHITE)
+    ax.set_xlim(-0.7,6.7); ax.set_ylim(-120,720)
+    ax.set_ylabel("Euro pro Monat (Modellrechnung)",color=DIMW,fontsize=11,labelpad=10)
+    ax.tick_params(axis="y",colors=DIMW,labelsize=9)
+    ax.tick_params(axis="x",length=0)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"{v:.0f} €"))
+    ax.grid(axis="y",color=GRAY,alpha=.45,lw=.6); ax.set_axisbelow(True)
+
+    fig.text(0.075,0.965,"Modellrechnung 2026: Alleinerziehende Vollzeitbeschäftigte "
+             "(Mindestlohn 13,90 €/h, 28.912 € auf 36.112 €) mit einem Kind, mittelgroße ostdeutsche Stadt",
+             fontsize=10.5,color=DIMW,fontstyle="italic")
+    ax.set_title("Was von 600 € Brutto-Tariferhöhung übrig bleibt (Stand: 2026)",
+                 fontsize=17,fontweight="bold",pad=26,color=WHITE,loc="left")
+    ax.text(0.5,-0.205,"25 % der nominalen Lohnerhöhung verbleiben netto — drei Viertel "
+            "verdunsten durch Transferentzug, Sozialabgaben und Steuer",
+            transform=ax.transAxes,ha="center",va="top",fontsize=11.5,color=GREEN,
+            fontweight="bold",bbox=dict(boxstyle="round,pad=0.5",fc=BG_COL,ec=GREEN,lw=1.0))
+    ax.annotate("© Linying Li",xy=(1.0,-0.30),xycoords='axes fraction',ha='right',va='top',
+                fontsize=11,color=DIMW,alpha=0.65,fontstyle='italic',annotation_clip=False)
+
+    out3b="/Users/lilinying/Downloads/abb3b_wasserfall_600euro_2026.png"
+    plt.savefig(out3b,dpi=DPI,facecolor=BG_COL,bbox_inches='tight')
+    plt.savefig(out3b.replace('.png','.pdf'),facecolor=BG_COL,bbox_inches='tight')
+    plt.close(fig)
+    print(f"Gespeichert: {out3b}")
+
+
+
+def figur_2b_lohnverbleibsquote():
+
+    # ═══════════ ABBILDUNG 2b – Lohnverbleibsquote (Stand: 2026, ohne UBI) ═══════════
+    # rcParams von figur_4_oecd() ggf. überschrieben -> Basis-Stil wieder setzen
+    plt.rcParams.update({"font.family":"serif",
+        "font.serif":["Georgia","Palatino","Times New Roman","DejaVu Serif"],
+        "mathtext.fontset":"dejavuserif","figure.facecolor":BG_COL,
+        "axes.facecolor":PANEL,"text.color":WHITE,"axes.labelcolor":DIMW,
+        "xtick.color":DIMW,"ytick.color":DIMW,"axes.linewidth":0.6})
+
+    R=_compute_2026()
+    AVG_WAGE_26=R['AVG_WAGE']; ML_VZ_26=R['ML_VZ']
+    GFB_26=R['GFB']; ZONE3_26=R['ZONE3']; BBG_KV_26=R['BBG_KV']; BBG_RV_26=R['BBG_RV']
+    xf26=R['xf']; roiA26=R['roiA']; roiB26=R['roiB']
+    bg_end26=R['bg_end']; ds26=R['ds']; de26=R['de']
+
+    fig,ax=plt.subplots(figsize=(18,9),facecolor=BG_COL)
+    ax.set_facecolor(PANEL); ax.spines[["top","right"]].set_visible(False)
+    ax.spines[["left","bottom"]].set_color(LGRAY)
+    xlim=(0.,2.5); m=(xf26>=xlim[0])&(xf26<=xlim[1])
+    xm=xf26[m]; ra=roiA26[m]; rb=roiB26[m].copy()
+
+    # BuT-Klippe durch Marker ersetzen
+    spike_mask = rb < -15
+    idx_cliff = np.where(spike_mask)[0]
+    if len(idx_cliff) > 0:
+        x_cliff = xm[idx_cliff[0]]
+        y_cliff = rb[idx_cliff[0]-1]
+        rb[spike_mask] = y_cliff
+    else:
+        x_cliff = None
+        y_cliff = None
+
+    bx=xf26[bg_end26]; mlx=ML_VZ_26/AVG_WAGE_26
+
+    at=ax.twiny()
+    at.set_xlim(xlim[0]*AVG_WAGE_26/1e3,xlim[1]*AVG_WAGE_26/1e3)
+    at.set_xlabel("Brutto-Jahreseinkommen [k€]",color=DIMW,fontsize=10,labelpad=8)
+    at.tick_params(colors=DIMW,labelsize=8.5)
+    at.spines[["top","right","left","bottom"]].set_color(LGRAY)
+    at.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"{v:.0f}k"))
+
+    for xt,c in [(GFB_26/AVG_WAGE_26,DIMW),(ZONE3_26/AVG_WAGE_26,C_YELLOW),
+                 (BBG_KV_26/AVG_WAGE_26,"#2e86ab"),(BBG_RV_26/AVG_WAGE_26,C_NETTO)]:
+        if xlim[0]<xt<=xlim[1]:
+            ax.axvline(xt,color=c,lw=.8,ls=":",alpha=.55,zorder=1)
+
+    ax.axvspan(0,bx,color=C_BG_ZONE,alpha=.30,zorder=0)
+    if ds26 is not None:
+        ax.axvspan(xf26[ds26],xf26[de26],color=C_DEAD,alpha=.10,zorder=1)
+
+    ax.plot(xm,ra,color=C_NETTO,lw=2.4,zorder=5)
+    ax.plot(xm,rb,color=C_FAM,lw=2.0,zorder=5)
+    ax.axhline(ROI_KAP,color=C_KAP,lw=1.6,ls="--",alpha=.85,zorder=4)
+    ax.text(xlim[1]-.03,ROI_KAP+2.5,f"Kapitalrendite ({ROI_KAP:.1f} %) — KESt+Soli, keine SV",
+            color=C_KAP,ha="right",fontsize=9,fontweight="bold",zorder=12,
+            bbox=dict(boxstyle="round,pad=0.15",fc=BG_COL,alpha=.92,ec="none"))
+    ax.axvline(mlx,color=C_YELLOW,lw=1.4,ls="-.",alpha=.45,zorder=2)
+
+    if ds26 is not None:
+        ax.text((xf26[ds26]+xf26[de26])/2,-15,'0 % Wachstum\nTote Zone',color=C_DEAD,
+                ha="center",fontsize=8.5,fontweight="bold",alpha=.90,zorder=12,
+                bbox=dict(boxstyle="round,pad=0.25",fc=BG_COL,ec=C_DEAD,lw=.6,alpha=.95))
+
+    if x_cliff is not None:
+        ax.plot(x_cliff, y_cliff, marker="v", color=C_DEAD, markersize=8, zorder=13)
+        ax.annotate("BuT-Klippe: −1.075€/Jahr", xy=(x_cliff, y_cliff - 2), xytext=(x_cliff + 0.05, y_cliff - 15),
+                    color=C_DEAD, fontsize=8.5, fontweight="bold", alpha=0.90, zorder=12,
+                    arrowprops=dict(arrowstyle="->", color=C_DEAD, lw=1.2),
+                    bbox=dict(boxstyle="round,pad=0.25", fc=BG_COL, ec=C_DEAD, lw=0.6, alpha=0.95),
+                    va="center", ha="left")
+
+    ax.axhline(0,color=LGRAY,lw=.8,alpha=.5)
+    ax.set_xlim(*xlim); ax.set_ylim(-25,100)
+    ax.set_xlabel(f"Einkommen (Vielfaches Durchschnittslohn · 1,0x = {AVG_WAGE_26/1e3:.1f}k€)",
+                  color=DIMW,fontsize=10.5,labelpad=10)
+    ax.set_ylabel("Lohnverbleibsquote [%]",color=DIMW,fontsize=11,labelpad=12)
+    ax.tick_params(axis="y",colors=DIMW,labelsize=9)
+    ax.tick_params(axis="x",colors=DIMW,labelsize=9)
+    ax.xaxis.set_major_formatter(mticker.FormatStrFormatter('%.1fx'))
+    ax.yaxis.set_major_formatter(mticker.PercentFormatter())
+    ax.grid(False)
+
+    leg=[Line2D([0],[0],color=C_NETTO,lw=2.4,label="Single"),
+         Line2D([0],[0],color=C_FAM,lw=2.0,label="Alleinerziehend +1 Kind"),
+         Line2D([0],[0],color=C_KAP,lw=1.6,ls="--",label=f"Kapitalrendite ({ROI_KAP:.1f} %)")]
+    ax.legend(handles=leg,loc="lower right",facecolor=PANEL2,edgecolor=LGRAY,
+              fontsize=8.5,framealpha=.95)
+    ax.set_title("Lohnverbleibsquote — was vom nächsten Euro Bruttolohn übrig bleibt (Stand: 2026)",
+                 fontsize=15,fontweight="bold",pad=30,color=WHITE)
+    ax.annotate("© Linying Li",xy=(1.0,-0.10),xycoords='axes fraction',ha='right',va='top',
+                fontsize=12,color=DIMW,alpha=0.65,fontstyle='italic',annotation_clip=False)
+
+    out2b="/Users/lilinying/Downloads/abb2b_lohnverbleibsquote_2026.png"
+    plt.savefig(out2b,dpi=DPI,facecolor=BG_COL,bbox_inches='tight')
+    plt.savefig(out2b.replace('.png','.pdf'),facecolor=BG_COL,bbox_inches='tight')
+    plt.close(fig)
+    print(f"Gespeichert: {out2b}")
+
+
+
+def figur_4b_oecd():
+    """
+    Lohnsteuer-Grenzsteuersatz im OECD-Vergleich (2026) -
+    + Kapitalertrags- und Immobilienbesteuerung Deutschland
+
+    Quellen:
+      Steuer- und Sozialrecht 2026 | §32a EStG 2026 (verifizierte Tarif-Koeffizienten)
+      SV-Beitragssätze 2026: KV 14,6 % + Ø-Zusatzbeitrag 2,9 % = 17,5 %,
+                             RV 18,6 %, AV 2,6 %; PV 3,6 % paritätisch,
+                             kinderlos + 0,6 % Zuschlag (AN allein)
+      Durchschnittslöhne: OECD-Stand 2024 (aktuellster verfügbarer Wert),
+                          für alle 9 Länder unverändert übernommen
+      BBG KV/PV 2026: 69.750 € | BBG RV/AV 2026: 101.400 € (bundeseinheitlich)
+      Soli-Freigrenze 2026: 20.350 € (Alleinstehende)
+      Werbungskostenpauschale: 1.230 €
+    """
+
+    import numpy as np
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import matplotlib.ticker as mticker
+
+    # ══════════════════════════════════════════════════════════════════════════════
+    # STIL  — Think-Tank / Wirtschaftsjournal (hell, serif)
+    # ══════════════════════════════════════════════════════════════════════════════
+    BG       = "#ffffff"   # reines Weiß (Druckqualität)
+    PANEL    = "#f8f8f6"   # sehr helles Warm-Grau für Plot-Fläche
+    GRIDC    = "#d0d0cc"   # helles Grau für Gitternetz
+    SPINE    = "#444444"   # dunkles Grau für Achsenränder
+    TEXTC    = "#1a1a1a"   # fast Schwarz für Hauptbeschriftungen
+    SUBTEXT  = "#555555"   # mittleres Grau für Achsentitel, Ticks
+
+    plt.rcParams.update({
+        "font.family":       ["Palatino Linotype", "Palatino", "Georgia",
+                              "Times New Roman", "DejaVu Serif"],
+        "font.size":         10,
+        "figure.facecolor":  BG,
+        "axes.facecolor":    PANEL,
+        "axes.spines.top":   False,
+        "axes.spines.right": False,
+        "axes.spines.left":  True,
+        "axes.spines.bottom":True,
+        "axes.edgecolor":    SPINE,
+        "axes.grid":         False,
+        "grid.linestyle":    "-",
+        "grid.alpha":        0.50,
+        "grid.color":        GRIDC,
+        "text.color":        TEXTC,
+        "axes.labelcolor":   SUBTEXT,
+        "xtick.color":       SUBTEXT,
+        "ytick.color":       SUBTEXT,
+        "xtick.labelsize":   9,
+        "ytick.labelsize":   9,
+    })
+
+    # ══════════════════════════════════════════════════════════════════════════════
+    # STEUERFUNKTIONEN DEUTSCHLAND (§32a EStG 2026)
+    # ══════════════════════════════════════════════════════════════════════════════
+    APW      = 50_257    # OECD-Durchschnittslohn DE (Stand 2024, unverändert)
+    GFB      = 12_348    # Grundfreibetrag 2026
+    Z2       = 17_799    # Ende Zone 2 (1. Progressionszone)
+    Z3       = 69_879    # Ende Zone 3 (2. Progressionszone)
+    REICH    = 277_826   # Reichensteuer-Grenze (unverändert)
+    SF       = 20_350    # Soli-Freigrenze 2026 (Alleinstehende)
+    BBG_KV   = 69_750    # KV/PV-BBG 2026
+    BBG_RV   = 101_400   # RV/AV-BBG 2026 (bundeseinheitlich)
+    KV_AN    = 0.175 / 2 # KV 14,6 % + Ø-Zusatzbeitrag 2,9 % = 17,5 %
+    PV_AN    = 0.036 / 2 + 0.006 # PV kinderlos: 1,8 % + 0,6 % Kinderlosenzuschlag = 2,4 % (AN)
+    RV_AN    = 0.186 / 2 # RV 18,6 %
+    AV_AN    = 0.026 / 2 # AV 2,6 %
+    WERBUNG  = 1_230     # Arbeitnehmer-Pauschbetrag 2026
+
+    def sv_an_betrag(b):
+        return min(b, BBG_KV) * (KV_AN + PV_AN) + min(b, BBG_RV) * (RV_AN + AV_AN)
+
+    def sv_an_grenz(b):
+        r = 0.0
+        if b <= BBG_KV: r += KV_AN + PV_AN
+        if b <= BBG_RV: r += RV_AN + AV_AN
+        return r
+
+    def est_grenz(zve):
+        zve = max(0, zve)
+        if zve <= GFB:  return 0.0
+        elif zve <= Z2:
+            y = (zve - GFB) / 10_000
+            return (2 * 914.51 * y + 1_400) / 10_000
+        elif zve <= Z3:
+            z = (zve - Z2) / 10_000
+            return (2 * 173.10 * z + 2_397) / 10_000
+        elif zve <= REICH: return 0.42
+        else:              return 0.45
+
+    def est_betrag(zve):
+        zve = max(0, zve)
+        if zve <= GFB:  return 0.0
+        elif zve <= Z2:
+            y = (zve - GFB) / 10_000; return (914.51 * y + 1_400) * y
+        elif zve <= Z3:
+            z = (zve - Z2) / 10_000; return (173.10 * z + 2_397) * z + 1_034.87
+        elif zve <= REICH: return 0.42 * zve - 11_135.63
+        else:              return 0.45 * zve - 19_470.38
+
+    def soli_grenz(zve, em):
+        est = est_betrag(zve)
+        if est <= SF: return 0.0
+        if 0.119 * (est - SF) < 0.055 * est: return 0.119 * em
+        return 0.055 * em
+
+    def de_marginal_an(mult):
+        """Grenzbelastung AN-Sicht (ESt+Soli+AN-SV) inkl. Vorsorgeaufwendungen-Deckelung"""
+        b    = max(mult * APW, 1.0)
+        kv_pv_g = (KV_AN + PV_AN) if b <= BBG_KV else 0.0
+        rv_av_g = (RV_AN + AV_AN) if b <= BBG_RV else 0.0
+        sv_g = kv_pv_g + rv_av_g
+
+        # Tatsächlicher ZvE-Abzug: Basis-KV (96%) und PV unbeschränkt.
+        # Der Rest (AV, 4% KV) ist im 1.900€ Deckel verpufft, da Basis-KV diesen sofort sprengt.
+        rv_betrag = min(b, BBG_RV) * RV_AN
+        kv_basis_betrag = min(b, BBG_KV) * (KV_AN * 0.96 + PV_AN)
+
+        zve = max(0, b - (rv_betrag + kv_basis_betrag) - WERBUNG)
+
+        em   = est_grenz(zve)
+        sm   = soli_grenz(zve, em)
+
+        # Marginal-Derivat: Nur RV + Basis-KV sind an der Grenze abzugsfähig
+        sv_g_deductible = 0.0
+        if b <= BBG_RV: sv_g_deductible += RV_AN
+        if b <= BBG_KV: sv_g_deductible += (KV_AN * 0.96 + PV_AN)
+
+        return (sv_g + (em + sm) * (1.0 - sv_g_deductible)) * 100.0
+
+    def de_average_an(mult):
+        """Durchschnittsbelastung AN-Sicht (ESt+Soli+AN-SV) / Brutto"""
+        b = max(mult * APW, 1.0)
+
+        # Tatsächliche SV-Beiträge
+        sv_betrag = min(b, BBG_KV) * (KV_AN + PV_AN) + min(b, BBG_RV) * (RV_AN + AV_AN)
+
+        # Abzugsaufwendungen für ZvE
+        rv_deductible = min(b, BBG_RV) * RV_AN
+        kv_basis_deductible = min(b, BBG_KV) * (KV_AN * 0.96 + PV_AN)
+        zve = max(0, b - (rv_deductible + kv_basis_deductible) - WERBUNG)
+
+        em_betrag = est_betrag(zve)
+
+        # Soli
+        soli = 0.0
+        if em_betrag > SF:
+            soli = min(0.119 * (em_betrag - SF), 0.055 * em_betrag)
+
+        return (sv_betrag + em_betrag + soli) / b * 100.0
+
+
+    # ══════════════════════════════════════════════════════════════════════════════
+    # OECD-LÄNDER: Formelbasierte Grenzbelastung (ESt + AN-SV, 2026)
+    # Jedes Land: eigener AW (OECD-Stand 2024), eigene Steuerformel, eigene SV-Grenzen
+    # ══════════════════════════════════════════════════════════════════════════════
+
+    # ── USA 2026 ──────────────────────────────────────────────────────────────────
+    # Federal brackets (single, 2026): 10/12/22/24/32/35/37 %
+    # FICA: SS 6.2% (BBG $184,500) + Medicare 1.45% + add. Medicare 0.9% (>$200k)
+    # Standard deduction $16,100; AW ≈ $82,933 (OECD-Stand 2024)
+    _US_AW = 82_933
+    _US_SD = 16_100
+    _US_BRACKETS = [(12_400, 0.10), (50_400, 0.12), (105_700, 0.22),
+                    (201_775, 0.24), (256_225, 0.32), (640_600, 0.35),
+                    (float('inf'), 0.37)]
+    _US_SS_BBG = 184_500
+    def marginal_us(mult):
+        b = max(mult * _US_AW, 1.0)
+
+        def calc_us_net_tax(inc):
+            # 1. FICA (Social Security + Medicare)
+            ss = min(inc, _US_SS_BBG) * 0.062
+            mc = inc * 0.0145
+            if inc > 200_000:
+                mc += (inc - 200_000) * 0.009  # Additional Medicare 0.9%
+
+            # 2. Federal Income Tax (progressive brackets)
+            ti = max(0, inc - _US_SD)
+            tax_fed = 0.0
+            prev_top = 0.0
+            for top, rate in _US_BRACKETS:
+                if ti > prev_top:
+                    tax_fed += (min(ti, top) - prev_top) * rate
+                prev_top = top
+
+            # 3. State Income Tax: Michigan 4.25% flat (OECD reference city Detroit)
+            # Consistent with other countries including sub-central taxes
+            tax_state = max(0.0, inc - 5_900) * 0.0425  # MI personal exemption ~$5,900 (2026)
+
+            return ss + mc + tax_fed + tax_state
+
+        return (calc_us_net_tax(b + 1.0) - calc_us_net_tax(b)) * 100.0
+
+    # ── Frankreich 2026 ───────────────────────────────────────────────────────────
+    # Barème IR 2026: 0/11/30/41/45 % (eingefroren = 2025)
+    # AN-SV: CSG 9.2%×98.25% + CRDS 0.5%×98.25% + Vieillesse déplafonnée 0.40%
+    #         + Vieillesse plafonnée 6.90% (≤1 PSS=48,060€) + Autonomie 0.30%
+    # AW ≈ €43,356 (OECD-Stand 2024)
+    # Hinweis: CDHR (contribution différentielle, greift erst >250.000 €, also
+    #          außerhalb des 0–5x-Bereichs) wird hier nicht implementiert.
+    _FR_AW = 43_356
+    _FR_PSS = 48_060
+    _FR_BRACKETS = [(11_600, 0.00), (29_579, 0.11), (84_577, 0.30),
+                    (181_917, 0.41), (float('inf'), 0.45)]
+    def marginal_fr(mult):
+        b = max(mult * _FR_AW, 1.0)
+
+        def calc_fr_net_tax(inc):
+            # 1. AN social contributions (Amounts)
+            csg_crds_base = inc * 0.9825 # Simplified: applies up to 4 PSS, assume full for simplicity
+            csg_ded = csg_crds_base * 0.068
+            csg_nded = csg_crds_base * (0.024 + 0.005)
+
+            vieil_depl = inc * 0.004  # vieillesse déplafonnée 0,40 % (2026)
+            vieil_plaf = min(inc, _FR_PSS) * 0.069
+
+            # AGIRC-ARRCO (Complémentaire retraite)
+            # Tranche 1: <= 1 PSS (~4.01% AN)
+            # Tranche 2: 1 PSS - 8 PSS (~9.72% AN, 2026)
+            t1 = min(inc, _FR_PSS)
+            t2 = max(0, min(inc, 8 * _FR_PSS) - _FR_PSS)
+            agirc_arrco = t1 * 0.0401 + t2 * 0.0972
+
+            # Prévoyance & Mutuelle (approx 0.78%)
+            prevoyance = inc * 0.0078
+
+            # Sums
+            sv_total = csg_ded + csg_nded + vieil_depl + vieil_plaf + agirc_arrco + prevoyance
+            # French payslip law: ALL mandatory employee contributions are deducted
+            # from gross to get net imposable, EXCEPT CSG non-déductible and CRDS.
+            # vieil_plaf, AGIRC-ARRCO, prévoyance ARE all deductible.
+            sv_deductible = csg_ded + vieil_depl + vieil_plaf + agirc_arrco + prevoyance
+
+            # 2. Income Tax Base
+            net_imp = inc - sv_deductible
+            abattement = min(max(net_imp * 0.10, 509), 14_555) # 10% allowance has min and max (2026)
+            rni = max(0.0, net_imp - abattement)
+
+            # 3. Barème IR (Income Tax)
+            tax = 0.0
+            prev_top = 0.0
+            for top, rate in _FR_BRACKETS:
+                if rni > prev_top:
+                    tax += (min(rni, top) - prev_top) * rate
+                prev_top = top
+
+            # 4. CEHR (Surtax on high incomes)
+            cehr = 0.0
+            if rni > 500_000:
+                cehr = (500_000 - 250_000) * 0.03 + (rni - 500_000) * 0.04
+            elif rni > 250_000:
+                cehr = (rni - 250_000) * 0.03
+
+            return sv_total + tax + cehr
+
+        return (calc_fr_net_tax(b + 1.0) - calc_fr_net_tax(b)) * 100.0
+
+    # ── Dänemark 2026 (Steuerreform 2026 — dreistufige Progression) ───────────────
+    # AM-bidrag 8% (auf Brutto, VOR Einkommensteuer)
+    # Bundskat 12.01% + Kommunalskat ~25.0% + neue Stufen mellem/top/toptop
+    # Personfradrag 54,100 DKK; Beskæftigelsesfradrag 12,75 % (max 63.300 DKK)
+    # Skatteloft 52.07% (ohne AM, ohne toptopskat) → max. Grenz-ESt ohne toptop 52.07%
+    # AW ≈ DKK 490,000 (OECD-Stand 2024)
+    _DK_AW = 490_000
+    _DK_FRADRAG = 54_100
+    _DK_BUND = 0.1201
+    _DK_KOMM = 0.250
+    _DK_LOFT = 0.5207  # Skatteloft (ohne AM, ohne toptopskat)
+    # Steuerreform 2026: dreistufige Progression auf das Einkommen nach AM-bidrag
+    _DK_MELLEM_GRENZE  = 641_200   # mellemskat 7,5 % ab hier
+    _DK_TOP_GRENZE     = 777_900   # topskat zusätzlich 7,5 % (→ 15 %) ab hier
+    _DK_TOPTOP_GRENZE  = 2_592_700 # toptopskat zusätzlich 5,0 % (→ 20 %) ab hier
+    _DK_MELLEM = 0.075
+    _DK_TOP    = 0.075
+    _DK_TOPTOP = 0.05
+    def marginal_dk(mult):
+        b = max(mult * _DK_AW, 1.0)
+
+        def calc_dk_net_tax(inc):
+            # 1. AM-bidrag (Labour market contribution, purely on gross!)
+            am_tax = inc * 0.08
+            after_am = inc - am_tax
+
+            # 2. Beschäftigungsabzug (Beskæftigelsesfradrag) 2026: 12,75 %, max 63.300 DKK
+            # Only reduces the basis for Kommune tax.
+            besk = min(after_am * 0.1275, 63_300)
+
+            # 3. Taxable Bases
+            # Personfradrag ist ein direkter Grundabzug.
+            base_bund = max(0.0, after_am - _DK_FRADRAG)
+            base_komm = max(0.0, after_am - besk - _DK_FRADRAG)
+
+            # 4. Compute Sub-Taxes
+            tax_bund = base_bund * _DK_BUND
+            tax_komm = base_komm * _DK_KOMM
+
+            # 5. Dreistufige Progression (Steuerreform 2026) auf after_am
+            mellemskat = max(0.0, after_am - _DK_MELLEM_GRENZE) * _DK_MELLEM
+            topskat    = max(0.0, after_am - _DK_TOP_GRENZE)    * _DK_TOP
+            toptopskat = max(0.0, after_am - _DK_TOPTOP_GRENZE) * _DK_TOPTOP
+
+            # 6. Skatteloft-Deckel
+            # Begrenzt die Summe bund+komm+mellem+top (OHNE toptopskat, OHNE AM) auf den Loft.
+            # toptopskat wird zusätzlich oben drauf erhoben (Loft inkl. toptop = 0,5707).
+            capped_tax = tax_bund + tax_komm + mellemskat + topskat
+            theoretical_ceiling_tax = max(0.0, after_am - _DK_FRADRAG) * _DK_LOFT
+            if capped_tax > theoretical_ceiling_tax:
+                # Reduktion zuerst über die obersten Progressionsstufen, konsistent
+                # zur Original-Implementierung (Topskat-Anteil wird gekappt).
+                capped_tax = theoretical_ceiling_tax
+
+            total_income_tax = capped_tax + toptopskat
+
+            return am_tax + total_income_tax
+
+        return (calc_dk_net_tax(b + 1.0) - calc_dk_net_tax(b)) * 100.0
+
+    # ── Schweiz 2026 (Kanton Zürich, Stadt Zürich als Referenz) ───────────────────
+    # CH 2026: AHV/ALV unverändert; direkte Bundessteuer nur geringfügige
+    #          Kalte-Progression-Anpassung → bei dieser Näherung vernachlässigt.
+    # Bundessteuer max. eff. 11.5%, Kanton+Gemeinde Zürich ~24-28% progressiv
+    # AHV/IV/EO AN: 5.30%, ALV AN: 1.10% (bis CHF 148,200)
+    # AW ≈ CHF 96,846 (OECD-Stand 2024)
+    _CH_AW = 96_846
+    _CH_AHV_AN = 0.053
+    _CH_ALV_AN = 0.011
+    _CH_ALV_BBG = 148_200
+    # Vereinfachte progressive Bundessteuer + Zürich Kantonal/Gemeinde
+    # (Näherung anhand effektiver Grenzsteuersätze Zürich Stadt, unverändert ggü. 2025)
+    _CH_BRACKETS = [(18_500, 0.0), (33_200, 0.02), (45_000, 0.06),
+                    (60_000, 0.10), (80_000, 0.16), (110_000, 0.22),
+                    (150_000, 0.28), (200_000, 0.32), (300_000, 0.35),
+                    (float('inf'), 0.36)]
+    def marginal_ch(mult):
+        b = max(mult * _CH_AW, 1.0)
+
+        def calc_ch_net_tax(inc):
+            # 1. Social Insurance
+            ahv = inc * _CH_AHV_AN
+            alv = min(inc, _CH_ALV_BBG) * _CH_ALV_AN
+            sv_total = ahv + alv
+
+            # 2. Tax Base Deductions (Zürich)
+            # Berufsauslagen (Professional expenses): 3% of income, min 2,000, max 4,000
+            berufs = min(max(inc * 0.03, 2_000), 4_000)
+            # Versicherungsabzug (Insurance deduction): ~2,600 CHF
+            versicherung = 2_600
+            # Social insurance is fully deductible
+            taxable = max(0.0, inc - berufs - versicherung - sv_total)
+
+            # 3. Combined progressive tax (Federal + Kanton Zürich + Gemeinde)
+            tax = 0.0
+            prev_top = 0.0
+            for top, rate in _CH_BRACKETS:
+                if taxable > prev_top:
+                    tax += (min(taxable, top) - prev_top) * rate
+                prev_top = top
+
+            return sv_total + tax
+
+        return (calc_ch_net_tax(b + 1.0) - calc_ch_net_tax(b)) * 100.0
+
+    # ── Schweden 2026 ─────────────────────────────────────────────────────────────
+    # Kommunalskatt ~32.38%, statlig inkomstskatt 20% ab SEK 643,000
+    # AN-Pensionsavgift 7% (BBG SEK 625,500)
+    # AW ≈ SEK 529,659 (OECD-Stand 2024)
+    _SE_AW = 529_659
+    _SE_KOMM = 0.3238
+    _SE_STAT = 0.20
+    _SE_STAT_GRENZE = 643_000
+    _SE_PENSION_AN = 0.07
+    _SE_PENSION_BBG = 625_500
+    def marginal_se(mult):
+        b = max(mult * _SE_AW, 1.0)
+
+        def calc_se_net_tax(inc):
+            pension_fee = min(inc, _SE_PENSION_BBG) * 0.07
+
+            # 1. Grundavdrag (GA) - Basic Deduction
+            pbb = 59_200 # Prisbasbelopp (PBB) 2026
+            if inc <= 0.99 * pbb:
+                ga = 0.423 * pbb
+            elif inc <= 2.72 * pbb:
+                ga = 0.423 * pbb + 0.20 * (inc - 0.99 * pbb)
+            elif inc <= 3.11 * pbb:
+                ga = 0.77 * pbb
+            elif inc <= 7.88 * pbb:
+                ga = 0.77 * pbb - 0.10 * (inc - 3.11 * pbb)
+            else:
+                ga = 0.293 * pbb
+            ga = min(ga, inc)
+
+            # 2. Tax Base
+            # Crucial Correction: Pension fee is given as a skattereduktion (tax credit),
+            # so it MUST NOT be actively deducted from the tax base here! (No double counting)
+            tax_base = max(0.0, inc - ga)
+
+            # 3. Gross Taxes
+            tax_komm = tax_base * _SE_KOMM
+            tax_stat = max(0.0, tax_base - _SE_STAT_GRENZE) * _SE_STAT
+            tax_total = tax_komm + tax_stat
+
+            # 4. Jobbskatteavdrag (JSA) - Skatteverket official formula (IL 67 kap)
+            # JSA approximates the kommunalskatt that would be paid on earned income,
+            # effectively making low-to-middle earners pay near-zero kommunalskatt.
+            # The formula uses "beskattningsbar förvärvsinkomst" (taxable earned income)
+            s = _SE_KOMM  # kommunalskattesats
+            bfi = tax_base  # beskattningsbar förvärvsinkomst = inc - ga
+
+            # IL 67 kap: statutory coefficients 0.332/0.111 are FRACTIONS of kommunalskattesats
+            # i.e., actual rate = coefficient × s, not the raw coefficient
+            c2 = 0.332 * s  # Phase 2 effective rate ~10.8%
+            c3 = 0.111 * s  # Phase 3 effective rate ~3.6%
+            if inc <= 0.91 * pbb:
+                jsa_calc = max(0.0, bfi) * s
+            elif inc <= 3.24 * pbb:
+                jsa_calc = min(0.91 * pbb, bfi) * s + max(0.0, bfi - 0.91 * pbb) * c2
+            elif inc <= 8.08 * pbb:
+                jsa_p2 = min(0.91 * pbb, bfi) * s + max(0.0, min(bfi, 3.24 * pbb) - 0.91 * pbb) * c2
+                jsa_calc = jsa_p2 + max(0.0, bfi - 3.24 * pbb) * c3
+            elif inc <= 13.54 * pbb:
+                jsa_p2 = min(0.91 * pbb, bfi) * s + max(0.0, min(bfi, 3.24 * pbb) - 0.91 * pbb) * c2
+                jsa_calc = jsa_p2 + max(0.0, min(bfi, 8.08 * pbb) - 3.24 * pbb) * c3
+            else:
+                jsa_p2 = min(0.91 * pbb, bfi) * s + max(0.0, min(bfi, 3.24 * pbb) - 0.91 * pbb) * c2
+                jsa_plateau = jsa_p2 + max(0.0, min(bfi, 8.08 * pbb) - 3.24 * pbb) * c3
+                jsa_calc = jsa_plateau - 0.03 * (inc - 13.54 * pbb)
+
+            # JSA cannot exceed the total kommunalskatt on earned income
+            jsa = max(0.0, min(jsa_calc, tax_komm))
+
+            # 5. Skattereduktion för allmän pensionsavgift
+            pension_credit = pension_fee
+
+            # Net tax calculation (Credits cannot reduce tax below 0)
+            net_inc_tax = max(0.0, tax_total - jsa - pension_credit)
+
+            return pension_fee + net_inc_tax
+
+        return (calc_se_net_tax(b + 1.0) - calc_se_net_tax(b)) * 100.0
+
+    # ── Polen 2026 ────────────────────────────────────────────────────────────────
+    # PIT: 12% (≤PLN 120,000) / 32% (darüber), Freibetrag PLN 30,000
+    # AN-ZUS: Emerytura 9.76% + Renta 1.5% + Chorobowe 2.45% = 13.71%
+    # ZUS-BBG (Emerytura+Renta): ~PLN 282,600 (30× Durchschnittslohn, 2026)
+    # Zdrowotna (Gesundheit): 9% ohne Obergrenze, nicht absetzbar
+    # AW ≈ PLN 91,625 (OECD-Stand 2024)
+    _PL_AW = 91_625
+    _PL_ZUS_RATE = 0.0976 + 0.015 + 0.0245   # 13.71%
+    _PL_ZUS_BBG = 282_600
+    _PL_ZDROW = 0.09    # Gesundheitsversicherung, ohne Obergrenze
+    _PL_FREI = 30_000
+    _PL_GRENZE_32 = 120_000
+    def marginal_pl(mult):
+        b = max(mult * _PL_AW, 1.0)
+
+        def calc_pl_net_tax(inc):
+            # 1. ZUS Contributions (Deductible from tax base)
+            zus_betrag = min(inc, _PL_ZUS_BBG) * _PL_ZUS_RATE
+
+            # 2. Zdrowotna (Health Insurance, 9%) on income AFTER ZUS deduction, NON-deductible
+            # Polski Ład 2022: base = gross - ZUS contributions
+            zdrow = max(0.0, inc - zus_betrag) * _PL_ZDROW
+
+            # 3. PIT Base
+            pit_basis = max(0.0, inc - zus_betrag)
+
+            # 4. PIT Calculation
+            if pit_basis <= _PL_FREI:
+                tax = 0.0
+            elif pit_basis <= _PL_GRENZE_32:
+                tax = max(0.0, pit_basis - _PL_FREI) * 0.12 # 30,000 allowance is tax free
+            else:
+                tax = max(0.0, _PL_GRENZE_32 - _PL_FREI) * 0.12 + (pit_basis - _PL_GRENZE_32) * 0.32
+
+            return zus_betrag + zdrow + tax
+
+        return (calc_pl_net_tax(b + 1.0) - calc_pl_net_tax(b)) * 100.0
+
+    # ── Niederlande 2026 ──────────────────────────────────────────────────────────
+    # Box 1: Schijf 1 35.75% (≤€38,883), Schijf 2 37.56% (≤€78,426), Schijf 3 49.50%
+    # Die 35.75% enthalten bereits Volksverzekeringen (AOW 17.90%+ANW 0.10%+WLZ 9.65%)
+    # Keine separate AN-SV neben den integrierten Prämien
+    # AN-Beitrag ZVW (Zorgverzekering): bereits in Box 1 Tarif integriert
+    # AW ≈ €58,248 (OECD-Stand 2024)
+    _NL_AW = 58_248
+    def marginal_nl(mult):
+        b = max(mult * _NL_AW, 1.0)
+
+        def calc_nl_net_tax(inc):
+            # 1. Box 1 Stat Tax (2026)
+            if inc <= 38_883:
+                tax = inc * 0.3575
+            elif inc <= 78_426:
+                tax = 38_883 * 0.3575 + (inc - 38_883) * 0.3756
+            else:
+                tax = 38_883 * 0.3575 + (78_426 - 38_883) * 0.3756 + (inc - 78_426) * 0.4950
+
+            # 2. Algemene Heffingskorting (AHK) 2026
+            ahk = 3_115.0 - max(0.0, (inc - 29_736) * 0.06398)
+            ahk = max(0.0, ahk)
+
+            # 3. Arbeidskorting (AK) - 2026-Stufen
+            if inc <= 11_965:
+                ak = inc * 0.08324
+            elif inc <= 25_845:
+                ak = 11_965 * 0.08324 + (inc - 11_965) * 0.31009
+            elif inc <= 45_592:
+                ak = 11_965 * 0.08324 + (25_845 - 11_965) * 0.31009 + (inc - 25_845) * 0.01950
+            else:
+                max_ak = 11_965 * 0.08324 + (25_845 - 11_965) * 0.31009 + (45_592 - 25_845) * 0.01950
+                ak = max_ak - max(0.0, (inc - 45_592) * 0.0651)
+            ak = max(0.0, ak)
+
+            # Tax credits are NON-refundable
+            # reduce the income tax to 0.
+            return max(0.0, tax - ahk - ak)
+
+        # Numeric derivative: The flawless reflection of true marginal burden
+        return (calc_nl_net_tax(b + 1.0) - calc_nl_net_tax(b)) * 100.0
+
+    # ── Japan 2026 ────────────────────────────────────────────────────────────────
+    # Nationale ESt: 5/10/20/23/33/40/45% + 2.1% Surtax
+    # Wohnsteuer (Jūminzei): ~10% flat
+    # AN-SV: Kosei Nenkin 9.15% (BBG ~JPY 7,800,000/Jahr)
+    #         Kenko Hoken 4.925% + Kaigo 0.81% + Kodomo-Kosodate 0.115% + Koyo 0.5%
+    # AW ≈ JPY 5,003,351 (OECD-Stand 2024)
+    _JP_AW = 5_003_351
+    _JP_NENKIN_RATE = 0.0915
+    _JP_NENKIN_BBG = 7_800_000   # Kosei Nenkin BBG
+    _JP_KENKO_RATE = 0.04925 + 0.0081 + 0.00115 # Kenko 4,925% + Kaigo 0,81% + Kodomo-Kosodate 0,115%
+    _JP_KENKO_BBG = 16_680_000   # Kenko Hoken BBG (approx 1.39M * 12)
+    _JP_KOYO_RATE = 0.005        # Employment insurance 2026 (no ceiling)
+    _JP_BRACKETS = [(1_950_000, 0.05), (3_300_000, 0.10), (6_950_000, 0.20),
+                    (9_000_000, 0.23), (18_000_000, 0.33), (40_000_000, 0.40),
+                    (float('inf'), 0.45)]
+    _JP_SURTAX = 0.021  # Wiederaufbausteuer
+    _JP_JUMIN = 0.10    # Wohnsteuer
+    # Arbeitseinkommensabzug (kyuyo shotoku kojo) — Sockel 2026 auf 740.000 angehoben
+    def _jp_employment_deduction(b):
+        if b <= 1_900_000: return 740_000
+        elif b <= 3_600_000: return b * 0.3 + 80_000
+        elif b <= 6_600_000: return b * 0.2 + 440_000
+        elif b <= 8_500_000: return b * 0.1 + 1_100_000
+        else: return 1_950_000
+
+    def _jp_employment_deduction_deriv(b):
+        if b <= 1_900_000: return 0.0
+        elif b <= 3_600_000: return 0.3
+        elif b <= 6_600_000: return 0.2
+        elif b <= 8_500_000: return 0.1
+        else: return 0.0
+
+    # Grundabzug national 2026 — einkommensabhängige Staffel
+    def _jp_basic_deduction(b):
+        if b <= 4_890_000:    return 1_040_000
+        elif b <= 6_550_000:  return 670_000
+        elif b <= 23_500_000: return 620_000
+        elif b <= 24_000_000: return 480_000
+        elif b <= 24_500_000: return 320_000
+        elif b <= 25_000_000: return 160_000
+        else:                 return 0
+
+    def marginal_jp(mult):
+        b = max(mult * _JP_AW, 1.0)
+
+        def calc_jp_net_tax(inc):
+            # 1. Social Insurance (separate ceilings per branch)
+            nenkin = min(inc, _JP_NENKIN_BBG) * _JP_NENKIN_RATE
+            kenko = min(inc, _JP_KENKO_BBG) * _JP_KENKO_RATE
+            koyo = inc * _JP_KOYO_RATE
+            sv_total = nenkin + kenko + koyo
+
+            # 2. Employment Income Deduction (給与所得控除)
+            ded = _jp_employment_deduction(inc)
+
+            # 3. National Tax (所得税)
+            # Deductions: Employment deduction + Social insurance (全額控除)
+            #             + einkommensabhängiger Grundabzug (基礎控除, 2026)
+            basic_nat = _jp_basic_deduction(inc)
+            ti_nat = max(0, inc - ded - sv_total - basic_nat)
+            tax_nat = 0.0
+            prev_top = 0.0
+            for top, rate in _JP_BRACKETS:
+                if ti_nat > prev_top:
+                    tax_nat += (min(ti_nat, top) - prev_top) * rate
+                prev_top = top
+            tax_nat *= (1 + _JP_SURTAX)  # 復興特別所得税 2.1%
+
+            # 4. Residential Tax (住民税) — separate basic deduction of 430,000 (unverändert)
+            ti_res = max(0, inc - ded - sv_total - 430_000)
+            tax_res = ti_res * 0.10  # 市町村民税 6% + 都道府県民税 4%
+            # 均等割 (~5,000 JPY per capita levy) omitted for marginal analysis
+
+            return sv_total + tax_nat + tax_res
+
+        return (calc_jp_net_tax(b + 1.0) - calc_jp_net_tax(b)) * 100.0
+
+    # ══════════════════════════════════════════════════════════════════════════════
+    # X-ACHSE & KURVENBERECHNUNG
+    # ══════════════════════════════════════════════════════════════════════════════
+    x_fine  = np.linspace(0.001, 5.0, 2000)
+    de_fine = np.array([de_marginal_an(v) for v in x_fine])
+    de_avg_fine = np.array([de_average_an(v) for v in x_fine])
+
+    # Alle OECD-Länder jetzt ebenfalls formelbasiert auf feinem Raster
+    us_fine = np.array([marginal_us(v) for v in x_fine])
+    fr_fine = np.array([marginal_fr(v) for v in x_fine])
+    dk_fine = np.array([marginal_dk(v) for v in x_fine])
+    ch_fine = np.array([marginal_ch(v) for v in x_fine])
+    se_fine = np.array([marginal_se(v) for v in x_fine])
+    pl_fine = np.array([marginal_pl(v) for v in x_fine])
+    nl_fine = np.array([marginal_nl(v) for v in x_fine])
+    jp_fine = np.array([marginal_jp(v) for v in x_fine])
+
+    # Kapital & Immobilien DE
+    KAP_SATZ  = 26.375   # 25 % + 5,5 % Soli
+    IMMO_SATZ =  0.0     # >10 Jahre Haltedauer § 23 EStG
+
+    # ══════════════════════════════════════════════════════════════════════════════
+    # FIGURE
+    # ══════════════════════════════════════════════════════════════════════════════
+    fig, ax = plt.subplots(figsize=(16, 9), facecolor=BG)
+    ax.set_facecolor(PANEL)
+    ax.spines[["left","bottom"]].set_color(SPINE)
+    ax.spines[["top","right"]].set_visible(False)
+
+    xlim = (-0.05, 5.55)
+    ylim = (-4, 73)
+
+    # ── OECD-Hintergrundkurven (jetzt formelbasiert) ──────────────────────────────
+    # Klassische Zeitschriften-Palette: gedeckte, gut unterscheidbare Farben
+    OECD_LINES = [
+        ("USA",          us_fine, "#2166ac", 1.4, (4, 3)),    # Königsblau
+        ("Frankreich",   fr_fine, "#d6604d", 1.4, (6, 2)),    # gedämpftes Rot
+        ("Dänemark",     dk_fine, "#1a9850", 1.4, (3, 4)),    # Waldgrün
+        ("Schweiz",      ch_fine, "#b35806", 1.4, (5, 2, 1, 2)), # Dunkelorange
+        ("Schweden",     se_fine, "#762a83", 1.4, (4, 4)),    # Pflaume
+        ("Polen",        pl_fine, "#4393c3", 1.4, (2, 5)),    # Stahlblau
+        ("Niederlande",  nl_fine, "#e08214", 1.4, (6, 3)),    # Bernstein
+        ("Japan",        jp_fine, "#7b3294", 1.4, (4, 2, 1, 2)), # Indigo
+    ]
+
+    # Labelpositionen (x, y-offset) für Zeilenende — dynamisch aus Endwert
+    OECD_LABEL_Y = {
+        "USA":         (5.0, us_fine[-1]  + 0.3),
+        "Frankreich":  (5.0, fr_fine[-1]  + 0.3),
+        "Dänemark":    (5.0, dk_fine[-1]  - 2.0),
+        "Schweiz":     (5.0, ch_fine[-1]  + 0.3),
+        "Schweden":    (5.0, se_fine[-1]  + 0.3),
+        "Polen":       (5.0, pl_fine[-1]  + 0.3),
+        "Niederlande": (5.0, nl_fine[-1]  - 2.5),
+        "Japan":       (5.0, jp_fine[-1]  + 0.3),
+    }
+
+    for name, ydata, color, lw, dash in OECD_LINES:
+        ax.plot(x_fine, ydata, color=color, lw=lw, linestyle=(0, dash),
+                alpha=0.55, zorder=2)
+        lx, ly = OECD_LABEL_Y[name]
+        ax.text(lx + 0.05, ly, name, color=color,
+                fontsize=7.8, va="center", alpha=0.78, clip_on=True)
+
+    # ── Deutschland AN-Kurve (Formel) ─────────────────────────────────────────────
+    # Deutschland-Hauptkurve: kräftiges Dunkelrot
+    ax.plot(x_fine, de_fine, color="#b2182b", lw=3.0, linestyle="--", zorder=8,
+            label="Deutschland — Grenzbelastung (Lohn)")
+    ax.plot(x_fine, de_avg_fine, color="#b2182b", lw=3.0, zorder=8,
+            label="Deutschland — Durchschnittsbelastung (Lohn)")
+
+    # ── BBG-Sprünge in DE annotieren ──────────────────────────────────────────────
+    BBG_KV_x = BBG_KV / APW
+    BBG_RV_x = BBG_RV / APW
+
+    # KV/PV-Sprung
+    y_before_kv = de_marginal_an(BBG_KV_x - 0.002)
+    y_after_kv  = de_marginal_an(BBG_KV_x + 0.002)
+    ax.axvline(BBG_KV_x, color="#555555", lw=0.9, ls=":", alpha=0.60, zorder=3)
+    ax.annotate(
+        f"BBG KV/PV\n({BBG_KV/1000:.0f}k€)\n↓{y_before_kv-y_after_kv:.1f} PP",
+        xy=(BBG_KV_x, (y_before_kv + y_after_kv) / 2),
+        xytext=(BBG_KV_x - 0.48, 56),
+        fontsize=7.8, color="#333333", alpha=0.90,
+        arrowprops=dict(arrowstyle="->", color="#555555", lw=0.9,
+                        connectionstyle="arc3,rad=0.2"),
+        bbox=dict(boxstyle="round,pad=0.25", fc=BG, ec="#888888", alpha=0.85)
+    )
+
+    # RV/AV-Sprung
+    y_before_rv = de_marginal_an(BBG_RV_x - 0.002)
+    y_after_rv  = de_marginal_an(BBG_RV_x + 0.002)
+    ax.axvline(BBG_RV_x, color="#555555", lw=0.9, ls=":", alpha=0.60, zorder=3)
+    ax.annotate(
+        f"BBG RV/AV\n({BBG_RV/1000:.0f}k€)\n↓{y_before_rv-y_after_rv:.1f} PP",
+        xy=(BBG_RV_x, (y_before_rv + y_after_rv) / 2),
+        xytext=(BBG_RV_x + 0.12, 57),
+        fontsize=7.8, color="#333333", alpha=0.90,
+        arrowprops=dict(arrowstyle="->", color="#555555", lw=0.9,
+                        connectionstyle="arc3,rad=-0.2"),
+        bbox=dict(boxstyle="round,pad=0.25", fc=BG, ec="#888888", alpha=0.85)
+    )
+
+    # ── Kapitalertrag-Linie ───────────────────────────────────────────────────────
+    ax.axhline(KAP_SATZ, color="#2166ac", lw=1.8, linestyle=(0, (5, 3)), zorder=6,
+               label=f"Deutschland — Kapitalertrag (Abgeltungsteuer {KAP_SATZ:.2f}%)")
+    ax.text(0.04, KAP_SATZ + 1.2,
+            f"Kapitalertrag: {KAP_SATZ:.1f}% flat  (25% KESt + 5,5% Soli)",
+            color="#2166ac", fontsize=8.5, va="bottom",
+            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#2166ac", alpha=0.80))
+
+    # ── Immobilien-Linie ──────────────────────────────────────────────────────────
+    ax.axhline(IMMO_SATZ + 0.4, color="#1a9850", lw=1.4,
+               linestyle=(0, (3, 5)), zorder=6,
+               label="Deutschland — Immobilien >10 J. (§23 EStG): 0%")
+    ax.text(0.04, IMMO_SATZ + 1.8,
+            "Immobilien >10 J. (§23 EStG): 0 %  — vollständig steuerfrei",
+            color="#1a9850", fontsize=8.5,
+            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#1a9850", alpha=0.80))
+
+    # ── Scherenpfeil: DE-Lohn vs. Kapital bei 2,5x ────────────────────────────────
+    ref_x   = 2.5
+    ref_de  = de_marginal_an(ref_x)
+    gap     = ref_de - KAP_SATZ
+    y_mid   = (ref_de + KAP_SATZ) / 2
+    ax.annotate("", xy=(ref_x, KAP_SATZ + 0.5), xytext=(ref_x, ref_de - 0.5),
+                arrowprops=dict(arrowstyle="<->", color="#444444", lw=1.0))
+    ax.text(ref_x + 0.08, y_mid,
+            f"~{gap:.0f} PP\nSchere\nLohn / Kapital",
+            color="#333333", fontsize=8, va="center", alpha=0.90,
+            bbox=dict(boxstyle="round,pad=0.25", fc=BG, alpha=0.75, ec="#aaaaaa"))
+
+    # ── Referenzlinien APW und BBG ────────────────────────────────────────────────
+    ax.axvline(1.0, color="#666666", lw=0.7, ls=":", alpha=0.45, zorder=1)
+    ax.text(1.02, ylim[0] + 1.5, f"Durchschnittlohn",
+            color="#555555", fontsize=7.5, alpha=0.80, va="bottom")
+
+    # Niedriglohn-Zone schattieren
+    ax.axvspan(0, 0.67, color="#aaaaaa", alpha=0.08, zorder=0)
+    ax.text(0.02, ylim[1] - 16, "Niedriglohnzone\n(<2/3 Durchschnitt)",
+            color="#666666", fontsize=7, alpha=0.65)
+
+    # ── Achsenformatierung ────────────────────────────────────────────────────────
+    ax.set_xlim(*xlim)
+    ax.set_ylim(*ylim)
+    ax.set_xlabel("Vielfaches des nationalen Durchschnittslohns (APW-Multiple)  "
+                  f"— DE: 1,0x = {AVG_WAGE/1e3:.1f} k€ p.a. (Quelle: OECD)",
+                  fontsize=10, labelpad=10, color=SUBTEXT)
+    ax.set_ylabel("Marginale Grenzbelastung [%]\n(Einkommensteuer + AN-Sozialabgaben)",
+                  fontsize=10, labelpad=10, color=SUBTEXT)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.1f}x"))
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
+    ax.yaxis.set_minor_locator(mticker.MultipleLocator(5))
+    ax.tick_params(which="minor", length=3)
+
+    # ── DE-Label am Linienende ────────────────────────────────────────────────────
+    de_end = de_marginal_an(5.0)
+    ax.text(5.07, de_end,
+            "DE Grenz.",
+            color="#b2182b", fontsize=9, fontweight="bold", va="center",
+            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#b2182b", alpha=0.85, linestyle="--"))
+
+    de_avg_end = de_average_an(5.0)
+    ax.text(5.07, de_avg_end,
+            "DE Durchschn.",
+            color="#b2182b", fontsize=9, fontweight="bold", va="center",
+            bbox=dict(boxstyle="round,pad=0.3", fc=BG, ec="#b2182b", alpha=0.85))
+
+    # ── Legende ───────────────────────────────────────────────────────────────────
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+
+    leg_handles = [
+        Line2D([0],[0], color="#b2182b", lw=2.8, linestyle="--",
+               label="Deutschland — Grenzbelastung (Marginal: ESt + AN-SV)"),
+        Line2D([0],[0], color="#b2182b", lw=2.8,
+               label="Deutschland — Durchschnittsbelastung (Effektiv: ESt + AN-SV)"),
+        Line2D([0],[0], color="#2166ac", lw=1.8, linestyle=(0,(5,3)),
+               label=f"Deutschland — Kapitalertrag ({KAP_SATZ:.2f}% flat)"),
+        Line2D([0],[0], color="#1a9850", lw=1.4, linestyle=(0,(3,5)),
+               label="Deutschland — Immobilien >10 J. (0%)"),
+        Line2D([0],[0], color="#888888", lw=1.2, linestyle="--", alpha=0.7,
+               label="OECD-Länder (gestrichelt)"),
+    ]
+    legend = ax.legend(
+        handles=leg_handles,
+        loc="upper left",
+        framealpha=0.80,
+        edgecolor="#cccccc",
+        facecolor=BG,
+        fontsize=9,
+        handlelength=2.8,
+        labelspacing=0.6,
+    )
+    for text in legend.get_texts():
+        text.set_color(TEXTC)
+
+    # ── Titel & Quellenzeile ──────────────────────────────────────────────────────
+    fig.suptitle(
+        "Marginale Lohnsteuerbelastung im OECD-Vergleich",
+        fontsize=14, fontweight="bold", color="#1a1a1a", y=0.995,
+    )
+
+    # ── Quellen-/Hinweiszeile ─────────────────────────────────────────────────────
+    fig.text(0.5, 0.012,
+             "Steuer- und Sozialsystem 2026 · Durchschnittslöhne: OECD-Stand 2024 "
+             "(aktuellster verfügbarer Wert)",
+             ha="center", va="bottom", fontsize=8, color=SUBTEXT, alpha=0.85)
+
+    # ── Autor ─────────────────────────────────────────────────────────────────────
+    fig.text(0.99, 0.01, "© Linying Li", ha="right", va="bottom",
+             fontsize=10, color="#555555", alpha=0.80, style="italic")
+
+    plt.tight_layout(rect=[0, 0.02, 1, 0.975])
+
+    outpath = "/Users/lilinying/Downloads/abb4b_oecd_vergleich_2026.png"
+    plt.savefig(outpath, dpi=DPI, bbox_inches="tight", facecolor=BG, edgecolor="none")
+    plt.savefig(outpath.replace(".png",".pdf"), bbox_inches="tight", facecolor=BG, edgecolor="none")
+    print(f"Gespeichert: {outpath}")
+
+    # ── Abschlusskontrolle ────────────────────────────────────────────────────────
+    print("\n── Kontrollwerte DE 2026 ──")
+    for m in [0.25, 0.50, 1.00, BBG_KV/APW, BBG_RV/APW, 2.50, 5.00]:
+        print(f"  {m:.3f}x ({m*APW:>7,.0f}€): {de_marginal_an(m):.1f}%")
+
+    print("\n── Kontrollwerte OECD-Länder bei 1.0x AW (2026) ──")
+    for name, fn in [("USA", marginal_us), ("Frankreich", marginal_fr),
+                     ("Dänemark", marginal_dk), ("Schweiz", marginal_ch),
+                     ("Schweden", marginal_se), ("Polen", marginal_pl),
+                     ("Niederlande", marginal_nl), ("Japan", marginal_jp)]:
+        vals = [fn(m) for m in [0.5, 1.0, 2.0, 5.0]]
+        print(f"  {name:12s}: 0.5x={vals[0]:5.1f}%  1.0x={vals[1]:5.1f}%  2.0x={vals[2]:5.1f}%  5.0x={vals[3]:5.1f}%")
+
+    plt.close(fig)
+
+
+
 if __name__ == "__main__":
     figur_1_einkommen()
     figur_2_lohnverbleibsquote()
     figur_3_wasserfall()
     figur_4_oecd()
+    figur_1b_einkommen()
+    figur_1b_vergleich()
+    figur_2b_lohnverbleibsquote()
+    figur_3b_wasserfall()
+    figur_4b_oecd()
     print("Fertig(%d dpi)" % DPI)
