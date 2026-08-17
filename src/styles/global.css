@@ -917,12 +917,18 @@ main { flex: 1; }
   margin: 0.75rem 0 1.75rem;
   letter-spacing: 0.03em;
 }
-.epigraph footer {
+.epigraph__src {
   font-family: var(--font-sans);
-  font-size: var(--fs-small);
+  font-size: var(--fs-micro);
   color: var(--color-muted-2);
-  text-align: right;
-  margin-top: 0.5rem;
+  text-decoration: none;
+  margin-left: 0.3em;
+  vertical-align: super;
+  line-height: 1;
+}
+.epigraph__src:hover {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
 }
 .about section {
   border-top: 1px solid var(--color-rule);
