@@ -909,7 +909,6 @@ main { flex: 1; }
 }
 .epigraph {
   font-family: var(--font-wordmark);
-  font-style: italic;
   font-size: var(--fs-base);
   color: var(--color-muted);
   line-height: 1.75;
@@ -917,6 +916,13 @@ main { flex: 1; }
   padding: 0.25rem 0 0.25rem 1.25rem;
   margin: 0.75rem 0 1.75rem;
   letter-spacing: 0.03em;
+}
+.epigraph footer {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  color: var(--color-muted-2);
+  text-align: right;
+  margin-top: 0.5rem;
 }
 .about section {
   border-top: 1px solid var(--color-rule);
