@@ -402,14 +402,16 @@ main { flex: 1; }
 .hero__meta strong { color: var(--color-ink); font-weight: 600; }
 
 .hero__cover {
-  aspect-ratio: 4 / 5;
   background: var(--color-accent-wash);
   overflow: hidden;
   position: relative;
   border-radius: 2px;
 }
-.hero__cover img { width: 100%; height: 100%; object-fit: cover; }
+/* Show the whole image at its natural ratio: covers are often wide charts,
+   and cropping them to a fixed box cuts off titles, legends and axes. */
+.hero__cover img { display: block; width: 100%; height: auto; }
 .hero__cover--empty {
+  aspect-ratio: 4 / 5;
   background:
     linear-gradient(
       135deg,
