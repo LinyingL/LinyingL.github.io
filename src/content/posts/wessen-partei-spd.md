@@ -61,8 +61,6 @@ Auf Landesebene ist das Bild weniger einheitlich. Seit der Bundestagswahl halten
   <figcaption>Abbildung 2 · Die Landesverbände folgen dem Bundestrend nicht durchgehend. Neun von vierzehn ausgewerteten Verbänden liegen stabil oder im Plus. Verglichen werden die Mittelwerte der Landtagsumfragen vor und seit der ersten Lesung des Rentenpakets am 16. Oktober 2025. Die Punkte zeigen Umfragemittelwerte, keine Veränderungen gegenüber den jeweiligen Landtagswahlergebnissen. Originalauswertung, Stand Juni 2026. Quelle: <a href="https://dawum.de/">DAWUM</a>; Lizenzangabe im Original: ODC-ODbL.</figcaption>
 </figure>
 
-[Originalskript](/assets/wessen-partei-spd/sonntagsfrage_spd_laender_original.py) · [Python-Code zur Reproduktion](/assets/wessen-partei-spd/sonntagsfrage_spd_laender.py) · [Daten und Reproduktion herunterladen](/assets/wessen-partei-spd/abb2-reproduktion.zip). Auswertung bis zum 10. Juni 2026; Rückgänge bis zu einem Prozentpunkt gelten als stabil. Einige Landeswerte beruhen auf weniger als drei Umfragen je Zeitfenster.
-
 Nur trägt dieser Befund weniger, als er zunächst verspricht. In Rheinland-Pfalz hat die Popularität Alexander Schweitzers den Abstieg gebremst. Gerettet hat sie die 35-jährige Regierungszeit der SPD nicht. In Mecklenburg-Vorpommern kämpft Manuela Schwesig vor der Wahl im September gegen eine AfD, die in der [Mai-Umfrage mit 36 zu 27 Prozent führt](https://www.infratest-dimap.de/umfragen-analysen/bundeslaender/mecklenburg-vorpommern/sonntagsfrage/).
 
 Personen und Regierungsbilanzen können die Partei dort stabilisieren, wo sie über beides verfügt. Sie machen den politischen Unterschied greifbarer. Ein Ministerpräsident oder eine Ministerpräsidentin lässt sich mit einer konkreten Bilanz verbinden, mit Entscheidungen und Konflikten im eigenen Land. Doch auch diese Bindung hat Grenzen. Eine populäre Person kann Verluste abfedern, ohne den allgemeinen Trend zu drehen.
@@ -118,3 +116,15 @@ Auch die Drohung mit dem Koalitionsbruch wird dadurch nicht mutiger, sondern pr�
 Im Juni endete mein Text mit der Frage, wessen Partei die SPD sei. Der September hat sie beantwortet, jedenfalls für Berlin: Wo die SPD mit der Union regiert und kein eigenes Profil setzt, wählt das linke Publikum die Linke. Strittig ist nicht die Antwort, sondern ob die Partei sie zur Kenntnis nimmt.
 
 Die SPD kann bei 13 Prozent bleiben und auf den nächsten Landeswahlkampf warten, in dem wieder jemand für sie steht. Oder sie kann die Partei derer werden, die ihre Miete zahlen können und eine Rente brauchen, die hält. Der Rentenentwurf, der vor Weihnachten ins Kabinett gehen soll, ist die nächste Probe. Gemessen wird sie nicht an einer Rede, sondern an einer Zahl.
+
+---
+
+**Methodische Hinweise**
+
+Die Reproduktionsläufe für beide Abbildungen berücksichtigen Umfragedaten bis zum 10. Juni 2026. Die Originalskripte und die datierten Fassungen sind gemeinsam dokumentiert. Abbildung 1 verwendet die im Originalskript definierten 14-Tage-Rollmittel je Partei. Für Abbildung 2 werden die Mittelwerte vor und seit dem Rentenstreit verglichen; Rückgänge bis zu einem Prozentpunkt gelten als stabil. Einige Landeswerte beruhen auf weniger als drei Umfragen je Zeitfenster.
+
+Python Code: [sonntagsfrage_spd.py](/assets/wessen-partei-spd/sonntagsfrage_spd.py) (Abbildung 1) und [sonntagsfrage_spd_laender.py](/assets/wessen-partei-spd/sonntagsfrage_spd_laender.py) (Abbildung 2).
+
+Originalskripte: [Abbildung 1](/assets/wessen-partei-spd/sonntagsfrage_spd_original.py) · [Abbildung 2](/assets/wessen-partei-spd/sonntagsfrage_spd_laender_original.py).
+
+[Code, Daten und Anleitung für beide Abbildungen herunterladen](/assets/wessen-partei-spd/abbildungen-reproduktion.zip).
