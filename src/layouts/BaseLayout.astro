@@ -63,9 +63,9 @@ const ogImage = image
     <script is:inline>
       (() => {
         const saved = localStorage.getItem('theme');
-        const theme = saved ?? (
-          window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-        );
+        // Light by default: the charts are drawn on cream paper and sit
+        // seamlessly on the light theme. Dark only when the reader chooses it.
+        const theme = saved ?? 'light';
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>

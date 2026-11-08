@@ -28,15 +28,15 @@ export const INTRO = {
 } as const;
 
 // Category list — add or rename freely.
-// "accent" is a Morandi-palette hex used as the small section label colour.
+// "accent" is the section label colour: a CSS variable defined per theme in global.css.
 export const CATEGORIES = [
-  { slug: 'economics', name: 'Economics', kicker: 'Economics', accent: '#8DA9BA' },
-  { slug: 'politics', name: 'Politics', kicker: 'Politics', accent: '#A5B3A0' },
+  { slug: 'economics', name: 'Economics', kicker: 'Economics', accent: 'var(--cat-economics)' },
+  { slug: 'politics', name: 'Politics', kicker: 'Politics', accent: 'var(--cat-politics)' },
   {
     slug: 'international-relations',
     name: 'International Relations',
     kicker: 'International Relations',
-    accent: '#BFA596',
+    accent: 'var(--cat-ir)',
   },
 ] as const;
 

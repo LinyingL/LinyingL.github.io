@@ -1,14 +1,19 @@
 /* =========================================================================
-   Morandi-inspired design tokens
-   Muted, desaturated palette. Sans for body, serif only for the wordmark.
+   Design tokens
+   Warm paper and ink; accents taken from the chart palette. Sans for body, serif only for the wordmark.
    ========================================================================= */
 
 :root {
   /* Primary — Morandi soft blue */
-  --color-accent: #8DA9BA;
-  --color-accent-dark: #6C8A9D;
-  --color-accent-soft: #D2DDE4;
-  --color-accent-wash: #EAEEF0;
+  --color-accent: #1F4E79;
+  --color-accent-dark: #163A5C;
+  --color-accent-soft: #C7D3E0;
+  --color-accent-wash: #E8EDF2;
+
+  /* Category labels: same hues as the charts, darkened for small text */
+  --cat-economics: #1F4E79;
+  --cat-politics: #A8473A;
+  --cat-ir: #4F6E42;
 
   /* Morandi sibling accents (used per-category / per-tag) */
   --color-sage: #A5B3A0;
@@ -57,30 +62,17 @@
   --t-med: 220ms ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-accent: #8DA9BA;
-    --color-accent-dark: #AFC3D0;
-    --color-accent-soft: #2A3943;
-    --color-accent-wash: #1B2529;
-    --color-ink: #EDE8DE;
-    --color-body: #D9D4C8;
-    --color-muted: #8F8A80;
-    --color-muted-2: #605C55;
-    --color-rule: #2C2A25;
-    --color-rule-strong: #4A4740;
-    --color-paper: #14130F;
-    --color-tint: #1C1B17;
-    --color-link: #EDE8DE;
-  }
-}
-
 [data-theme="light"] {
   color-scheme: light;
-  --color-accent: #8DA9BA;
-  --color-accent-dark: #6C8A9D;
-  --color-accent-soft: #D2DDE4;
-  --color-accent-wash: #EAEEF0;
+  --color-accent: #1F4E79;
+  --color-accent-dark: #163A5C;
+  --color-accent-soft: #C7D3E0;
+  --color-accent-wash: #E8EDF2;
+
+  /* Category labels: same hues as the charts, darkened for small text */
+  --cat-economics: #1F4E79;
+  --cat-politics: #A8473A;
+  --cat-ir: #4F6E42;
   --color-ink: #2A2824;
   --color-body: #3A3733;
   --color-muted: #7A756D;
@@ -94,10 +86,13 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --color-accent: #8DA9BA;
-  --color-accent-dark: #AFC3D0;
-  --color-accent-soft: #2A3943;
-  --color-accent-wash: #1B2529;
+  --color-accent: #8FB3D9;
+  --color-accent-dark: #B5CDE6;
+  --color-accent-soft: #22344A;
+  --color-accent-wash: #18212B;
+  --cat-economics: #8FB3D9;
+  --cat-politics: #E08A78;
+  --cat-ir: #9DBF8C;
   --color-ink: #EDE8DE;
   --color-body: #D9D4C8;
   --color-muted: #8F8A80;
